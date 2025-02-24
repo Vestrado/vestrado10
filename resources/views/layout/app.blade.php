@@ -383,7 +383,7 @@
 						<div class="w-full">
 							<a href="/halaman2.html">
 								<img
-									src="Thumb1_4645Campus.png"
+									src="assets/images/Thumb1_4645Campus.png"
 									alt="Vestrado's Campus Tees"
 									class="w-full h-50 object-cover rounded-md mb-4" />
 								<h3 class="text-md font-semibold mb-1">
@@ -481,7 +481,7 @@
 						<div class="w-full">
 							<a href="/halaman2.html">
 								<img
-									src="Thumb1_Cam465465pus.png"
+									src="assets/images/Thumb1_Cam465465pus.png"
 									alt="Vestrado's Campus Tees"
 									class="w-full h-50 object-cover rounded-md mb-4" />
 								<h3 class="text-md font-semibold mb-1">
@@ -579,7 +579,7 @@
 						<div class="w-full">
 							<a href="/halaman2.html">
 								<img
-									src="Thumb1_Cam4564pus.png"
+									src="assets/images/Thumb1_Cam4564pus.png"
 									alt="Vestrado's Campus Tees"
 									class="w-full h-50 object-cover rounded-md mb-4" />
 								<h3 class="text-md font-semibold mb-1">
@@ -677,7 +677,7 @@
 						<div class="w-full">
 							<a href="/halaman2.html">
 								<img
-									src="paragons.png"
+									src="assets/images/paragons.png"
 									alt="Vestrado's Campus Tees"
 									class="w-full h-50 object-cover rounded-md mb-4" />
 								<h3 class="text-md font-semibold mb-1">
@@ -775,7 +775,7 @@
 						<div class="w-full">
 							<a href="/halaman2.html">
 								<img
-									src="Thumb1_C456456ampus.png"
+									src="assets/images/Thumb1_C456456ampus.png"
 									alt="Vestrado's Campus Tees"
 									class="w-full h-50 object-cover rounded-md mb-4" />
 								<h3 class="text-md font-semibold mb-1">
