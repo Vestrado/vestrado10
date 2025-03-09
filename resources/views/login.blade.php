@@ -1,5 +1,5 @@
 <!-- Login box start -->
-<form method="post" action="{{ route('login.store') }}">
+<form method="post" action="{{ route('login.process') }}">
     @csrf <!-- This directive is important for CSRF protection -->
         <div class="login-box">
           <div class="login-form">

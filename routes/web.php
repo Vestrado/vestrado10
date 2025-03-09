@@ -15,10 +15,15 @@ use App\Http\Controllers\loginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     //return view('store');
+//     Route::get('/', [loginController::class, 'store'])->name('store');
+// });
 
-Route::get('/test', [testController::class, 'index'])->name('test');
-Route::get('/login', [loginController::class, 'index'])->name('login');
-Route::post('/mainpage', [loginController::class, 'store'])->name('login.store');
+//Route::get('/test', [testController::class, 'index'])->name('test');
+Route::get('/home', [loginController::class, 'index'])->name('login');
+Route::post('/loginprocess', [loginController::class, 'loginprocess'])->name('login.process');
+Route::get('/store', [loginController::class, 'store'])->name('store');
+Route::get('/', [loginController::class, 'store'])->name('store');
+Route::post('/logout', [loginController::class, 'logout'])->name('logout');
+Route::get('/logout', [loginController::class, 'logout'])->name('logout');

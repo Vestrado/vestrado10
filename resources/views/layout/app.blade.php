@@ -2,9 +2,9 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="assets/images/favicon.png">
 		<title>Vestrado Loyalty Store</title>
 		<script src="https://cdn.tailwindcss.com"></script>
 	</head>
@@ -39,18 +39,24 @@
 				</div>
 
 				<!-- Kanan-->
-				<div class="flex items-center space-x-4">
-					<button class="text-sm font-medium hover:text-green-700">
-						Client Panel
-					</button>
-					<div class="flex items-center space-x-2">
-						<img
-							class="w-8 h-8 rounded-full object-cover"
-							src="profil.png"
-							alt="User Photo" />
-						<span class="text-sm">Brooklyn (12398)</span>
-					</div>
-				</div>
+                @if(isset($islogin) && $islogin)
+                    <div class="flex items-center space-x-4">
+                        <button class="text-sm font-medium hover:text-green-700">
+                            Client Panel
+                        </button>
+                        <div class="flex items-center space-x-2">
+                            <img
+                                class="w-8 h-8 rounded-full object-cover"
+                                src="assets/images/profil.png"
+                                alt="User Photo" />
+                            <span class="text-sm">{{ $data['firstName'] }} ({{session('loadid')}})</span>
+                        </div>
+                    </div>
+                @else
+                    <div class="flex items-center space-x-4">
+                        &nbsp;
+                    </div>
+                @endif
 			</header>
 
 			<!--  Konten -->
@@ -878,23 +884,8 @@
 				<aside
 					class="w-80 bg-[#EEEEEE] border-l border-gray-200 p-4 space-y-8 hidden lg:block">
 					<!-- Loyalty Summary -->
-					<div class="bg-[#1C1C1C] p-4 space-y-8 rounded-xl">
-						<h2 class="text-sm font-semibold text-white mb-2">
-							Loyalty Summary
-						</h2>
-						<p class="text-sm text-white">
-							Total Points
-							<span class="float-right text-white font-bold">6700 Pts</span>
-						</p>
-						<p class="text-sm text-white">
-							Lots Collected
-							<span class="float-right text-white font-bold">67 Lots</span>
-						</p>
-						<p class="text-sm text-white">
-							Your Ranking
-							<span class="float-right text-white font-bold">Bronze</span>
-						</p>
-					</div>
+                    @yield('sidebar-kanan')
+
 
 					<!-- Balance Info -->
 					<div class="bg-[#1C1C1C] p-4 rounded-xl space-y-2">
@@ -1145,5 +1136,12 @@
 				</div>
 			</footer>
 		</div>
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
 	</body>
 </html>
