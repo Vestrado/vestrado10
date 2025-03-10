@@ -41,14 +41,103 @@ class loginController extends Controller
         return null;
     }
 
+    private function fetchtrade($id)
+    {
+        // Define the API URL for accounts
+        $urlTrades = 'https://my.vestrado.com/rest/trades';
+
+        // Set the headers
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer 9083b30e232b13336f9f6aa64bb753221d6d5d4ba1ebe441d4d78c521522f78d145110b7bc30a23016a5bbd12f561fb6225b10438bf428d0888d5b13',
+        ];
+
+        // Set the body for accounts
+        $todayDate = now()->format('Y-m-d H:i:s');
+        $body = [
+            'userId' => $id,
+            'openDate' => [
+                'begin' => '2025-01-01 00:00:00'
+            ],
+            'closeDate' => [
+                'end' => $todayDate
+            ],
+            'closeDate' => [
+                'end' => $todayDate
+            ],
+            'ticketType' => [ // Add the ticketType array here
+                'buy',
+                'sell'
+            ],
+            'orders' => [
+                [
+                    'field' => 'closeDate',
+                    'direction' => 'DESC'
+                ]
+            ],
+            'segment' => [
+                'limit' => 10000
+            ]
+        ];
+
+        // Send the POST request for accounts
+        $responseAccounts = Http::withHeaders($headers)->post($urlTrades, $body);
+
+        if ($responseAccounts->successful()) {
+            $datatrade = $responseAccounts->json();
+
+
+            return $datatrade;
+        }
+
+        return null;
+    }
+
+    private function fetchbalance($id,$loginid)
+    {
+        // Define the API URL for accounts
+        $urlTrades = 'https://my.vestrado.com/rest/accounts/trade-statistic';
+
+        // Set the headers
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer 9083b30e232b13336f9f6aa64bb753221d6d5d4ba1ebe441d4d78c521522f78d145110b7bc30a23016a5bbd12f561fb6225b10438bf428d0888d5b13',
+        ];
+
+        // Set the body for accounts
+        //$todayDate = now()->format('Y-m-d H:i:s');
+        $body = [
+            'userId' => $id,
+            'login' => $loginid
+        ];
+
+        // Send the POST request for accounts
+        $responseBalance = Http::withHeaders($headers)->post($urlTrades, $body);
+
+        if ($responseBalance->successful()) {
+            $dataBalance = $responseBalance->json();
+
+
+            return $dataBalance;
+        }
+
+        return null;
+    }
+
     public function index()
     {
         if (session('loadid')) {
             $data = $this->fetchUserDetails(session('loadid'));
+            $datatrade = $this->fetchtrade('19294');
+
+            $totalVolume = collect($datatrade)->sum('volume');
+            $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+
 
             if ($data) {
                 return view('store', [
-                    'data' => $data, // User details
+                    'datauser' => $data, // User details
+                    'totalVolume' => $totalVolume,
                     'islogin' => true,
                 ]);
             } else {
@@ -62,11 +151,56 @@ class loginController extends Controller
     public function store()
     {
         if (session('loadid')) {
+            $id=session('loadid');
             $data = $this->fetchUserDetails(session('loadid'));
+            $datatrade = $this->fetchtrade(session('loadid'));
+
+
+
+
+            $totalVolume = collect($datatrade)->map(function ($item) {
+                // If currency is "USC", divide volume by 1000
+                if ($item['currency'] === 'USC') {
+                    return $item['volume'] / 1000;
+                }
+                // Otherwise, return the volume as is
+                return $item['volume'];
+            })->sum(); // Sum all volumes
+
+            $totalVolume = round($totalVolume, 2); // Round to 2 decimal places
+            $lastCloseDate = collect($datatrade)->pluck('closeDate')->first();
+            $userID = collect($datatrade)->pluck('userId')->first();
+            $loginID = collect($datatrade)->pluck('login')->first();
+            $userID = $userID ?? $id; // If $userID is not available, use the $id passed to the method
+
+            // $userInfo = DB::table('users_info')->where('user_id', $id)->first();
+            // if ($userInfo) {
+            //     // Data exists, update the record
+            //     DB::table('users_info')
+            //         ->where('user_id', $userID)
+            //         ->update([
+            //             'total_lots' => $totalVolume,
+            //             'last_trans' => $lastCloseDate,
+            //         ]);
+            // } else {
+            //     // Data does not exist, insert a new record
+            //     DB::table('users_info')->insert([
+            //         'name' => 'Jane Doe',
+            //         'user_id' => $userID,
+            //         'total_lots' => $totalVolume,
+            //         'last_trans' => $lastCloseDate,
+            //     ]);
+            // }
+
+            $databalance = $this->fetchbalance(session('loadid'),$loginID);
+            $balance = collect($databalance)->pluck('tradeBalance')->first();
 
             if ($data) {
                 return view('store', [
-                    'data' => $data, // User details
+                    'datauser' => $data, // User details
+                    'totalVolume' => $totalVolume,
+                    'loginID' => $loginID,
+                    'balance' => $balance,
                     'islogin' => true,
                 ]);
             } else {
@@ -110,7 +244,9 @@ class loginController extends Controller
                 }
 
                 // Set the session variable
-                session(['loadid' => $data['id']]);
+                session(['loadid' => '19294']);     //manual set
+                //session(['loadid' => $data['id']]);
+
 
                 $loadid = $data['id'];
 
@@ -148,6 +284,81 @@ class loginController extends Controller
 
         // Redirect with a success message
         return redirect()->route('store')->with('success', 'You have been logged out successfully.');
+    }
+
+    public function details($id)
+    {
+        // Logic to show a specific trade
+        if (session('loadid')) {
+            //$loadid = session('loadid');
+
+            // Define the API URL for accounts
+            $urlTrades = 'https://my.vestrado.com/rest/trades';
+
+            // Set the headers
+            $headers = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer 9083b30e232b13336f9f6aa64bb753221d6d5d4ba1ebe441d4d78c521522f78d145110b7bc30a23016a5bbd12f561fb6225b10438bf428d0888d5b13',
+            ];
+
+            // Set the body for accounts
+            $body = [
+                'userId' => $id,
+                'openDate' => [
+
+                    'begin' => '2025-01-01 00:00:00'
+                ],
+                'closeDate' => [
+                    'end' => '2025-01-31 23:59:59'
+                ],
+                // 'ticketType' => [
+                //     'buy','sell'
+                // ],
+                'orders' => [
+                [
+                    'field' => 'closeDate',
+                    'direction' => 'DESC'
+                ]
+                ],
+                'segment' => [
+                'limit' => 10000
+                ]
+            ];
+
+            // Send the POST request for accounts
+            $responseAccounts = Http::withHeaders($headers)->post($urlTrades, $body);
+
+            if ($responseAccounts->successful()) {
+                $data = $responseAccounts->json();
+                $totalVolume = collect($data)->sum('volume');
+                $totalVolume = round(collect($data)->sum('volume'), 2);
+                $lastCloseDate = collect($data)->pluck('closeDate')->first();
+                $userID = collect($data)->pluck('userId')->first();
+
+                // INSERT INTO TABLE users_info
+                // DB::table('users_info')->insert([
+                //     'name' => 'Jane Doe',
+                //     'user_id' => $userID,
+                //     'total_lots' => $totalVolume,
+                //     'last_trans' => $lastCloseDate,
+                // ]);
+
+                return view('tradedetails_view', [
+                    'data' => $data,
+                    'totalVolume' => $totalVolume,
+                    'lastCloseDate' => $lastCloseDate,
+                ]);
+
+            } else {
+                $error = [
+                    'status' => $responseAccounts->status(),
+                    'message' => $responseAccounts->body(),
+                ];
+                return redirect()->back()->with('error', $error['message']);
+            }
+        } else {
+            return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
+        }
     }
 
 
