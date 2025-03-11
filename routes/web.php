@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\testController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\storeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,7 @@ Route::get('/store', [loginController::class, 'store'])->name('store');
 Route::get('/', [loginController::class, 'store'])->name('store');
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 Route::get('/logout', [loginController::class, 'logout'])->name('logout');
+
+Route::get('/storeinside', [storeController::class, 'index'])->name('store.insdie');
 
 Route::get('/tradedetails-{id}', [loginController::class, 'details'])->name('trades.details');

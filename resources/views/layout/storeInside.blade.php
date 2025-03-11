@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vestrado Loyalty Store - Product Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* From Uiverse.io by WhiteNervosa */
+.slider {
+  background-color: #ffffff2b;
+  border-radius: 100px;
+  padding: 1px;
+  margin: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  align-items: center;
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 20px;
+  box-shadow: rgba(0, 0, 0, 0.62) 0px 0px 5px inset, rgba(0, 0, 0, 0.21) 0px 0px 0px 24px inset,
+        #22cc3f 0px 0px 0px 0px inset, rgba(224, 224, 224, 0.45) 0px 1px 0px 0px;
+}
+
+.slider::after {
+  content: "";
+  display: flex;
+  top: 2.3px;
+  left: 2px;
+  width: 15px;
+  height: 15px;
+  background-color: #e3e3e3;
+  border-radius: 200px;
+  position: absolute;
+  box-shadow: transparent 0px 0px 0px 2px, rgba(0, 0, 0, 0.3) 0px 6px 6px;
+  transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s, background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  will-change: left, background-color;
+}
+
+.switch input[type="checkbox"]:checked + .slider {
+  box-shadow: rgba(0, 0, 0, 0.62) 0px 0px 5px inset, #22cc3f 0px 0px 0px 2px inset, #22cc3f 0px 0px 0px 24px inset,
+        rgba(224, 224, 224, 0.45) 0px 1px 0px 0px;
+}
+
+.switch input[type="checkbox"]:checked + .slider::after {
+  left: 24px;
+}
+
+.switch input[type="checkbox"] {
+  display: none;
+}
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans">
+    <div class="min-h-screen flex flex-col">
+      <header class="flex items-center justify-between bg-white p-4 shadow">
+        <div class="flex items-center space-x-2">
+
+          <span class="text-xl font-bold">Loyalty Store</span>
+        </div>
+        <div class="hidden lg:block w-1/3">
+          <input
+            type="text"
+            class="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:ring-green-300"
+            placeholder="Find something here..." />
+        </div>
+        <div class="flex items-center space-x-4">
+          <button class="text-sm font-medium hover:text-green-700">
+            Client Panel
+          </button>
+          <div class="flex items-center space-x-2">
+            <img
+              class="w-8 h-8 rounded-full object-cover"
+              src="profil.png"
+              alt="User" />
+            <span class="text-sm">Brooklyn (12398)</span>
+          </div>
+        </div>
+      </header>
+      <div class="flex  ">
+        <div>
+        <main class=" grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <img
+              src="Thumb1_Campus.png"
+              alt="Hoodie"
+              class="w-full h-50 object-cover rounded-md mb-4" />
+            <div class="flex space-x-2">
+              <img
+                src="Thumb1_Campus.png"
+                class="w-20 h-20 rounded-md cursor-pointer" />
+              <img
+                src="Thumb1_Campus.png"
+                class="w-20 h-20 rounded-md cursor-pointer" />
+              <img
+                src="Thumb1_Campus.png"
+                class="w-20 h-20 rounded-md cursor-pointer" />
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded-lg ">
+            <h2 class="text-2xl font-bold">Vestrado Campus Hoodie</h2>
+            <div class="flex items-center mb-1">
+                <div class="flex items-center mb-1">
+                  <!-- Rating (bintang) -->
+                  <svg
+                    class="w-4 h-4 text-green-500 mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902
+                          0l1.286 3.966a1 1 0 00.95.69h4.167c.969
+                          0 1.371 1.24.588 1.81l-3.37 2.448a1 1
+                          0 00-.363 1.118l1.286 3.966c.3.921-.755
+                          1.688-1.54 1.118l-3.37-2.448a1 1 0
+                          00-1.176 0l-3.37 2.448c-.784.57-1.84-
+                          .197-1.54-1.118l1.286-3.966a1 1
+                          0 00-.363-1.118L2.098 9.393c-.783-
+                          .57-.38-1.81.588-1.81h4.167a1 1
+                          0 00.95-.69l1.286-3.966z"></path>
+                  </svg>
+                  <svg
+                    class="w-4 h-4 text-green-500 mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902
+                          0l1.286 3.966a1 1 0 00.95.69h4.167c.969
+                          0 1.371 1.24.588 1.81l-3.37 2.448a1 1
+                          0 00-.363 1.118l1.286 3.966c.3.921-.755
+                          1.688-1.54 1.118l-3.37-2.448a1 1 0
+                          00-1.176 0l-3.37 2.448c-.784.57-1.84-
+                          .197-1.54-1.118l1.286-3.966a1 1
+                          0 00-.363-1.118L2.098 9.393c-.783-
+                          .57-.38-1.81.588-1.81h4.167a1 1
+                          0 00.95-.69l1.286-3.966z" />
+                  </svg>
+                  <svg
+                    class="w-4 h-4 text-green-500 mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902
+                          0l1.286 3.966a1 1 0 00.95.69h4.167c.969
+                          0 1.371 1.24.588 1.81l-3.37 2.448a1 1
+                          0 00-.363 1.118l1.286 3.966c.3.921-.755
+                          1.688-1.54 1.118l-3.37-2.448a1 1 0
+                          00-1.176 0l-3.37 2.448c-.784.57-1.84-
+                          .197-1.54-1.118l1.286-3.966a1 1
+                          0 00-.363-1.118L2.098 9.393c-.783-
+                          .57-.38-1.81.588-1.81h4.167a1 1
+                          0 00.95-.69l1.286-3.966z" />
+                  </svg>
+                  <svg
+                    class="w-4 h-4 text-green-500 mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902
+                          0l1.286 3.966a1 1 0 00.95.69h4.167c.969
+                          0 1.371 1.24.588 1.81l-3.37 2.448a1 1
+                          0 00-.363 1.118l1.286 3.966c.3.921-.755
+                          1.688-1.54 1.118l-3.37-2.448a1 1 0
+                          00-1.176 0l-3.37 2.448c-.784.57-1.84-
+                          .197-1.54-1.118l1.286-3.966a1 1
+                          0 00-.363-1.118L2.098 9.393c-.783-
+                          .57-.38-1.81.588-1.81h4.167a1 1
+                          0 00.95-.69l1.286-3.966z" />
+                  </svg>
+                  <svg
+                    class="w-4 h-4 text-green-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902
+                          0l1.286 3.966a1 1 0 00.95.69h4.167c.969
+                          0 1.371 1.24.588 1.81l-3.37 2.448a1 1
+                          0 00-.363 1.118l1.286 3.966c.3.921-.755
+                          1.688-1.54 1.118l-3.37-2.448a1 1 0
+                          00-1.176 0l-3.37 2.448c-.784.57-1.84-
+                          .197-1.54-1.118l1.286-3.966a1 1
+                          0 00-.363-1.118L2.098 9.393c-.783-
+                          .57-.38-1.81.588-1.81h4.167a1 1
+                          0 00.95-.69l1.286-3.966z" />
+                  </svg>
+                </div>
+              </div>
+            <p class="text-green-600 font-semibold text-lg">
+              300 Points / 50 Lots
+            </p>
+            <p class="text-gray-600 mt-2">
+              Introducing the Vestrado Cypher Sweatshirt...
+            </p>
+            <p class="text-sm text-gray-500 mt-2">Materials: Cotton</p>
+            <p class="text-sm text-gray-500">Product SKU: 287364</p>
+            <div class="mt-4">
+              <h3 class="font-semibold">Select Size</h3>
+              <div class="flex space-x-2 mt-2">
+                <button class="border px-3 py-1 rounded-md">XS</button>
+                <button class="border px-3 py-1 rounded-md">S</button>
+                <button class="border px-3 py-1 rounded-md">M</button>
+                <button class="border px-3 py-1 rounded-md">L</button>
+                <button class="border px-3 py-1 rounded-md">XL</button>
+                <button class="border px-3 py-1 rounded-md">2XL</button>
+                <button class="border px-3 py-1 rounded-md">3XL</button>
+              </div>
+            </div>
+            <div class="mt-6 flex space-x-4">
+              <button id="getThisBtn"
+                class="px-6 py-2 bg-black text-white rounded-md " >
+                GET THIS
+              </button>
+              <button onclick="(window.location.href) = 'index.html';" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-md">
+                BACK
+              </button>
+            </div>
+          </div>
+
+        </main>
+        <div class="w-full p-6 bg-white ">
+            <h3 class="text-lg font-bold mb-4">You May Also Like</h3>
+            <div class="flex w-full gap-6">
+              <div class="bg-gray-100 p-4 rounded-lg text-center">
+                <img src="Thumb1_Camp57us.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+                <h4 class="text-md font-semibold">Vestrado's Campus Tees</h4>
+                <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
+              </div>
+              <div class="bg-gray-100 p-4 rounded-lg text-center">
+                <img src="Thumb1_4645Campus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+                <h4 class="text-md font-semibold">Vestrado's Campus Cap</h4>
+                <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
+              </div>
+              <div class="bg-gray-100 p-4 rounded-lg text-center">
+                <img src="Thumb1_Cam4564pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+                <h4 class="text-md font-semibold">Vestrado's Trading Plan</h4>
+                <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
+              </div>
+              <div class="bg-gray-100 p-4 rounded-lg text-center">
+                <img src="Thumb1_Cam465465pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+                <h4 class="text-md font-semibold">Vestrado's Trading Plan</h4>
+                <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div>
+        <aside
+          class="w-80 bg-[#EEEEEE] border-l border-gray-200 p-4 space-y-8 hidden lg:block">
+          <!-- Loyalty Summary -->
+          <div class="bg-[#1C1C1C] p-4 space-y-8 rounded-xl">
+            <h2 class="text-sm font-semibold text-white mb-2">
+              Loyalty Summary
+            </h2>
+            <p class="text-sm text-white">
+              Total Points
+              <span class="float-right text-white font-bold">6700 Pts</span>
+            </p>
+            <p class="text-sm text-white">
+              Lots Collected
+              <span class="float-right text-white font-bold">67 Lots</span>
+            </p>
+            <p class="text-sm text-white">
+              Your Ranking
+              <span class="float-right text-white font-bold">Bronze</span>
+            </p>
+          </div>
+
+          <!-- Balance Info -->
+          <div class="bg-[#1C1C1C] p-4 rounded-xl space-y-2">
+            <div class="space-y-8">
+              <div
+                class="w-40 h-14 bg-black flex rounded-full items-center px-4">
+                <p class="text-sm text-white font-medium">
+                  Live Account (5231)
+                </p>
+              </div>
+              <div>
+                <p class="text-sm text-white">Balance</p>
+                <p class="text-xl text-white font-bold">$2,882.78</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white p-4 rounded-xl space-y-8">
+            <h3 class="text-sm font-bold mb-2">Quick Access</h3>
+            <div class="flex items-center space-x-4 justify-between">
+              <div>
+                <img class="flex items-center" src="Group 341.png" alt="" />
+                <button class="text-sm text-black py-2 rounded-md">
+                  Deposit
+                </button>
+              </div>
+              <div>
+                <img class="flex items-center" src="2.png" alt="" />
+                <button class="text-sm text-black py-2 rounded-md">
+                  Withdraw
+                </button>
+              </div>
+              <div>
+                <img class="flex items-center" src="Group 345.png" alt="" />
+                <button class="text-sm text-black py-2 rounded-md">
+                  Transfer
+                </button>
+              </div>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-6">
+              <h3 class="text-sm font-semibold mb-2">Open Live Account</h3>
+              <h3 class="text-sm font-semibold mb-2">Open Demo Account</h3>
+            </div>
+          </div>
+
+          <!-- Account Manager -->
+          <div class="bg-gray-100 p-4 rounded-md">
+            <h3 class="text-sm font-bold">My Account Manager</h3>
+            <div class="flex flex-col pt-5 items-center gap-6 space-x-3 mt-3">
+              <img
+                class="w-auto h-auto rounded-full object-cover"
+                src="profil.png"
+                alt="Mona Foto" />
+              <div>
+                <p class="text-sm font-semibold">Mona Hanalina</p>
+                <p class="text-xs text-gray-500">mona@vestrado.com</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-center mt-3">
+              <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
+                <img src="telpon.png" alt="" />
+              </button>
+              <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
+                <img src="sms.png" alt="" />
+              </button>
+              <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
+                <img src="email.png" alt="" />
+              </button>
+            </div>
+          </div>
+        </aside>
+    </div>
+      </div>
+      </div>
+    </div>
+    <footer class="bg-white mt-8 p-6 border-t border-gray-200">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
+          <!-- Services -->
+          <div>
+            <h4 class="font-semibold mb-2">Services</h4>
+            <ul class="space-y-1">
+              <li>
+                <a href="#" class="text-gray-600 hover:underline">Contacts</a>
+              </li>
+              <li><a href="#" class="text-gray-600 hover:underline">FAQ</a></li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >Tutorial Videos</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >Economic Calendar</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >Forex Calculator</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >IB Programme</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Legal Terms -->
+          <div>
+            <h4 class="font-semibold mb-2">Legal Terms</h4>
+            <ul class="space-y-1">
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >Risk Disclosure</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >Return Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline">Language</a>
+              </li>
+            </ul>
+          </div>
+          <!-- About -->
+          <div>
+            <h4 class="font-semibold mb-2">About</h4>
+            <ul class="space-y-1">
+              <li>
+                <a href="#" class="text-gray-600 hover:underline">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline"
+                  >Return Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:underline">Language</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Social Media -->
+          <div>
+            <h4 class="font-semibold mb-2">Social Media</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-600 hover:text-green-600"><img src="Facebook F.png" alt=""></a>
+              <a href="#" class="text-gray-600 hover:text-green-600"><img src="Twitter Bird.png" alt=""></a>
+              <a href="#" class="text-gray-600 hover:text-green-600"><img src="Instagram.png" alt=""></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="mt-6 text-xs text-gray-500">
+          <p>
+            Risk Warning: Trading Forex and CFDs involves significant risk and
+            can result in the loss of your invested capital. You should not
+            invest more than you can afford to lose and should ensure that you
+            fully understand the risks involved...
+          </p>
+          <p class="mt-2">
+            Restrictions: Vestrado Ltd are unable to service clients under
+            certain jurisdictions ...
+          </p>
+        </div>
+      </footer>
+      <div id="alertModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-98 relative">
+            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">&times;</button>
+            <div class="flex gap-4 items-center">
+                <div>
+                    <img src="Thumb1_Campus.png" alt="Hoodie" class="w-40 h-40 rounded-md mb-4">
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold">Vestrado Campus Hoodie</h2>
+                    <p class="text-gray-500 text-sm">SKU: 928633</p>
+                    <p class="text-gray-500 text-sm">Size: XXL</p>
+                    <p class="text-gray-500 text-sm">Color: Black</p>
+                    <p class="font-bold text-lg mt-2">300PTS / 50LOTS</p>
+                </div>
+            </div>
+            <div class="mt-4 flex">
+
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+            <div>
+              <span class="text-sm text-gray-700 peer-checked:text-green-600">I want to redeem this merchandise using my points</span>
+              <p class="text-xs text-gray-500 ">(My Current Points: <strong>350pts</strong>)</p>
+            </div>
+            </div>
+            <div class="mt-2 flex">
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+                <div>
+                  <span class="text-sm text-gray-700">I want to redeem this merchandise using my lots</span>
+                  <p class="text-xs text-gray-500 ">(My Current Lots: <strong>310Lots</strong>)</p>
+                </div>
+            </div>
+            <button onclick="closeModal()" class="w-full bg-black text-white py-2 mt-4 rounded-lg text-center hover:bg-gray-800 transition">PLACE ORDER</button>
+        </div>
+      </div>
+      <script>
+        document.getElementById('getThisBtn').addEventListener('click', function() {
+          document.getElementById('alertModal').classList.remove('hidden');
+        });
+        function closeModal() {
+          document.getElementById('alertModal').classList.add('hidden');
+        }
+      </script>
+  </body>
+</html>

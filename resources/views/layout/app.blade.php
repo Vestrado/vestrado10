@@ -129,14 +129,14 @@
 							</div>
 						</div>
 					</div>
-                    @endif
+
 					<div class="bg-white p-4 rounded-xl space-y-8">
 						<h3 class="text-sm font-bold mb-2">Quick Access</h3>
 						<div class="flex items-center space-x-4 justify-between">
 							<div>
 								<img
 									class="flex items-center"
-									src="Group 341.png"
+									src="assets/images/Group 341.png"
 									alt="" />
 								<button class="text-sm text-black py-2 rounded-md">
 									Deposit
@@ -145,7 +145,7 @@
 							<div>
 								<img
 									class="flex items-center"
-									src="2.png"
+									src="assets/images/2.png"
 									alt="" />
 								<button class="text-sm text-black py-2 rounded-md">
 									Withdraw
@@ -154,7 +154,7 @@
 							<div>
 								<img
 									class="flex items-center"
-									src="Group 345.png"
+									src="assets/images/Group 345.png"
 									alt="" />
 								<button class="text-sm text-black py-2 rounded-md">
 									Transfer
@@ -167,13 +167,14 @@
 						</div>
 					</div>
 
+
 					<!-- Account Manager -->
 					<div class="bg-gray-100 p-4 rounded-md">
 						<h3 class="text-sm font-bold">My Account Manager</h3>
 						<div class="flex flex-col pt-5 items-center gap-6 space-x-3 mt-3">
 							<img
 								class="w-auto h-auto rounded-full object-cover"
-								src="profil.png"
+								src="assets/images/profil.png"
 								alt="Mona Foto" />
 							<div>
 								<p class="text-sm font-semibold">Mona Hanalina</p>
@@ -183,21 +184,22 @@
 						<div class="flex items-center justify-center mt-3">
 							<button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
 								<img
-									src="telpon.png"
+									src="assets/images/telpon.png"
 									alt="" />
 							</button>
 							<button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
 								<img
-									src="sms.png"
+									src="assets/images/sms.png"
 									alt="" />
 							</button>
 							<button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
 								<img
-									src="email.png"
+									src="assets/images/email.png"
 									alt="" />
 							</button>
 						</div>
 					</div>
+                    @endif
 				</aside>
 			</div>
 
@@ -328,21 +330,21 @@
 								href="#"
 								class="text-gray-600 hover:text-green-600"
 								><img
-									src="Facebook F.png"
+									src="assets/images/Facebook F.png"
 									alt=""
 							/></a>
 							<a
 								href="#"
 								class="text-gray-600 hover:text-green-600"
 								><img
-									src="Twitter Bird.png"
+									src="assets/images/Twitter Bird.png"
 									alt=""
 							/></a>
 							<a
 								href="#"
 								class="text-gray-600 hover:text-green-600"
 								><img
-									src="Instagram.png"
+									src="assets/images/Instagram.png"
 									alt=""
 							/></a>
 						</div>
