@@ -1,22 +1,22 @@
 @extends('layout.storeInside')
 
-{{-- @section('main-content')
+@section('main-content')
 
 <main class=" grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="bg-white p-6 rounded-lg shadow">
         <img
-        src="Thumb1_Campus.png"
+        src="assets/images/Thumb1_Campus.png"
         alt="Hoodie"
         class="w-full h-50 object-cover rounded-md mb-4" />
         <div class="flex space-x-2">
             <img
-            src="Thumb1_Campus.png"
+            src="assets/images/Thumb1_Campus.png"
             class="w-20 h-20 rounded-md cursor-pointer" />
             <img
-            src="Thumb1_Campus.png"
+            src="assets/images/Thumb1_Campus.png"
             class="w-20 h-20 rounded-md cursor-pointer" />
             <img
-            src="Thumb1_Campus.png"
+            src="assets/images/Thumb1_Campus.png"
             class="w-20 h-20 rounded-md cursor-pointer" />
         </div>
     </div>
@@ -132,7 +132,7 @@
             class="px-6 py-2 bg-black text-white rounded-md " >
             GET THIS
             </button>
-            <button onclick="(window.location.href) = 'index.html';" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-md">
+            <button onclick="(window.location.href) = '{{ route('store') }}';" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-md">
             BACK
             </button>
         </div>
@@ -144,26 +144,26 @@
     <h3 class="text-lg font-bold mb-4">You May Also Like</h3>
     <div class="flex w-full gap-6">
         <div class="bg-gray-100 p-4 rounded-lg text-center">
-            <img src="Thumb1_Camp57us.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+            <img src="assets/images/Thumb1_Camp57us.png" class="w-full h-50 object-cover rounded-md mb-4"/>
             <h4 class="text-md font-semibold">Vestrado's Campus Tees</h4>
             <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg text-center">
-            <img src="Thumb1_4645Campus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+            <img src="assets/images/Thumb1_4645Campus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
             <h4 class="text-md font-semibold">Vestrado's Campus Cap</h4>
             <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg text-center">
-            <img src="Thumb1_Cam4564pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+            <img src="assets/images/Thumb1_Cam4564pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
             <h4 class="text-md font-semibold">Vestrado's Trading Plan</h4>
             <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg text-center">
-            <img src="Thumb1_Cam465465pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+            <img src="assets/images/Thumb1_Cam465465pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
             <h4 class="text-md font-semibold">Vestrado's Trading Plan</h4>
             <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
         </div>
     </div>
 </div>
 
-@endsection --}}
+@endsection

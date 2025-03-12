@@ -29,6 +29,6 @@ Route::get('/', [loginController::class, 'store'])->name('store');
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 
-Route::get('/storeinside', [storeController::class, 'index'])->name('store.insdie');
+Route::get('/storeinside', [storeController::class, 'index'])->name('store.inside');
 
 Route::get('/tradedetails-{id}', [loginController::class, 'details'])->name('trades.details');
