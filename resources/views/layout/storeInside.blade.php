@@ -139,31 +139,86 @@
                 @endif
             </div>
 
-          <!-- Account Manager -->
-          <div class="bg-gray-100 p-4 rounded-md">
-            <h3 class="text-sm font-bold">My Account Manager</h3>
-            <div class="flex flex-col pt-5 items-center gap-6 space-x-3 mt-3">
-              <img
-                class="w-auto h-auto rounded-full object-cover"
-                src="profil.png"
-                alt="Mona Foto" />
-              <div>
-                <p class="text-sm font-semibold">Mona Hanalina</p>
-                <p class="text-xs text-gray-500">mona@vestrado.com</p>
-              </div>
+            <!-- Balance Info -->
+            @if(isset($islogin) && $islogin)
+            <div class="bg-[#1C1C1C] p-4 rounded-xl space-y-2">
+                <div class="space-y-8">
+                    <div
+                        class="w-40 h-14 bg-black flex rounded-full items-center px-4">
+                        <p class="text-sm text-white font-medium">
+                            Live Account ({{ $loginID }})
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-white">Balance</p>
+                        <p class="text-xl text-white font-bold">$ {{ number_format($balance ?? 0, 2) }}</p>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center justify-center mt-3">
-              <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
-                <img src="telpon.png" alt="" />
-              </button>
-              <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
-                <img src="sms.png" alt="" />
-              </button>
-              <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
-                <img src="email.png" alt="" />
-              </button>
+
+            <div class="bg-white p-4 rounded-xl space-y-8">
+                <h3 class="text-sm font-bold mb-2">Quick Access</h3>
+                <div class="flex items-center space-x-4 justify-between">
+                    <div>
+                        <img
+                            class="flex items-center"
+                            src="assets/images/Group 341.png"
+                            alt="" />
+                        <button class="text-sm text-black py-2 rounded-md">
+                            Deposit
+                        </button>
+                    </div>
+                    <div>
+                        <img
+                            class="flex items-center"
+                            src="assets/images/2.png"
+                            alt="" />
+                        <button class="text-sm text-black py-2 rounded-md">
+                            Withdraw
+                        </button>
+                    </div>
+                    <div>
+                        <img
+                            class="flex items-center"
+                            src="assets/images/Group 345.png"
+                            alt="" />
+                        <button class="text-sm text-black py-2 rounded-md">
+                            Transfer
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-6">
+                    <h3 class="text-sm font-semibold mb-2">Open Live Account</h3>
+                    <h3 class="text-sm font-semibold mb-2">Open Demo Account</h3>
+                </div>
             </div>
-          </div>
+
+            <!-- Account Manager -->
+            <div class="bg-gray-100 p-4 rounded-md">
+                <h3 class="text-sm font-bold">My Account Manager</h3>
+                <div class="flex flex-col pt-5 items-center gap-6 space-x-3 mt-3">
+                <img
+                    class="w-auto h-auto rounded-full object-cover"
+                    src="assets/images/profil.png"
+                    alt="Mona Foto" />
+                <div>
+                    <p class="text-sm font-semibold">Mona Hanalina</p>
+                    <p class="text-xs text-gray-500">mona@vestrado.com</p>
+                </div>
+                </div>
+                <div class="flex items-center justify-center mt-3">
+                <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
+                    <img src="assets/images/telpon.png" alt="" />
+                </button>
+                <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
+                    <img src="assets/images/sms.png" alt="" />
+                </button>
+                <button class="bg-gray-50 text-white px-2 py-1 rounded text-xs">
+                    <img src="assets/images/email.png" alt="" />
+                </button>
+                </div>
+            </div>
+            @endif
         </aside>
     </div>
       </div>
@@ -251,9 +306,9 @@
           <div>
             <h4 class="font-semibold mb-2">Social Media</h4>
             <div class="flex space-x-4">
-              <a href="#" class="text-gray-600 hover:text-green-600"><img src="Facebook F.png" alt=""></a>
-              <a href="#" class="text-gray-600 hover:text-green-600"><img src="Twitter Bird.png" alt=""></a>
-              <a href="#" class="text-gray-600 hover:text-green-600"><img src="Instagram.png" alt=""></a>
+              <a href="#" class="text-gray-600 hover:text-green-600"><img src="assets/images/Facebook F.png" alt=""></a>
+              <a href="#" class="text-gray-600 hover:text-green-600"><img src="assets/images/Twitter Bird.png" alt=""></a>
+              <a href="#" class="text-gray-600 hover:text-green-600"><img src="assets/images/Instagram.png" alt=""></a>
             </div>
           </div>
         </div>
@@ -277,7 +332,7 @@
             <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">&times;</button>
             <div class="flex gap-4 items-center">
                 <div>
-                    <img src="Thumb1_Campus.png" alt="Hoodie" class="w-40 h-40 rounded-md mb-4">
+                    <img src="assets/images/Thumb1_Campus.png" alt="Hoodie" class="w-40 h-40 rounded-md mb-4">
                 </div>
                 <div>
                     <h2 class="text-lg font-semibold">Vestrado Campus Hoodie</h2>
@@ -305,7 +360,7 @@
             </label>
                 <div>
                   <span class="text-sm text-gray-700">I want to redeem this merchandise using my lots</span>
-                  <p class="text-xs text-gray-500 ">(My Current Lots: <strong>310Lots</strong>)</p>
+                  <p class="text-xs text-gray-500 ">(My Current Lots: <strong>{{ number_format($totalVolume ?? 0, 2) }}Lots</strong>)</p>
                 </div>
             </div>
             <button onclick="closeModal()" class="w-full bg-black text-white py-2 mt-4 rounded-lg text-center hover:bg-gray-800 transition">PLACE ORDER</button>

@@ -43,6 +43,12 @@ class UserService
 
     public function fetchtrade($id)
     {
+        $cacheKey = 'trade_details_' . $id;
+
+        // Check if the data is already cached
+        if (Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
+        }
         // Define the API URL for accounts
         $urlTrades = 'https://my.vestrado.com/rest/trades';
 
@@ -86,8 +92,47 @@ class UserService
         if ($responseAccounts->successful()) {
             $datatrade = $responseAccounts->json();
 
+            Cache::put($cacheKey, $datatrade, now()->addMinutes(10));
 
             return $datatrade;
+        }
+
+        return null;
+    }
+
+    public function fetchbalance($id,$loginid)
+    {
+        $cacheKey = 'fetch_balance_' . $loginid;
+
+        // Check if the data is already cached
+        if (Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
+        }
+        // Define the API URL for accounts
+        $urlTrades = 'https://my.vestrado.com/rest/accounts/trade-statistic';
+
+        // Set the headers
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token,
+        ];
+
+        // Set the body for accounts
+        //$todayDate = now()->format('Y-m-d H:i:s');
+        $body = [
+            'userId' => $id,
+            'login' => $loginid
+        ];
+
+        // Send the POST request for accounts
+        $responseBalance = Http::withHeaders($headers)->post($urlTrades, $body);
+
+        if ($responseBalance->successful()) {
+            $dataBalance = $responseBalance->json();
+
+            Cache::put($cacheKey, $dataBalance, now()->addMinutes(10));
+
+            return $dataBalance;
         }
 
         return null;

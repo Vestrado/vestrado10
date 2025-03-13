@@ -14,6 +14,7 @@
                     >All Merchandising</a
                 >
             </li>
+            @if(isset($islogin) && $islogin)
             <li
                 class="hover:border-2 hover:border-black p-2 hover:rounded-lg hover:bg-black">
                 <a
@@ -30,6 +31,7 @@
                     >Shopping Cart</a
                 >
             </li>
+            @endif
         </ul>
     </div>
 

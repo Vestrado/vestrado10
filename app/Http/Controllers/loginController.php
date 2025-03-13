@@ -6,129 +6,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use App\Services\UserService;
 
 class loginController extends Controller
 {
+    /***************** DECLARE SERIVICE ***********/
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /***************** START HERE ***********/
-
-
-    private function fetchUserDetails($loadid)
-    {
-        // Define a unique cache key for the user data
-        $cacheKey = 'user_details_' . $loadid;
-
-        // Check if the data is already cached
-        if (Cache::has($cacheKey)) {
-            return Cache::get($cacheKey);
-        }
-
-        // If not cached, fetch the data from the API
-        $token = '9083b30e232b13336f9f6aa64bb753221d6d5d4ba1ebe441d4d78c521522f78d145110b7bc30a23016a5bbd12f561fb6225b10438bf428d0888d5b13';
-        $response = Http::withHeaders([
-            'accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $token,
-        ])->get('https://my.vestrado.com/rest/users/' . $loadid);
-
-        if ($response->successful()) {
-            $data = $response->json();
-
-            // Cache the data for a specific duration (e.g., 60 minutes)
-            Cache::put($cacheKey, $data, now()->addMinutes(60));
-
-            return $data;
-        }
-
-        return null;
-    }
-
-    private function fetchtrade($id)
-    {
-        // Define the API URL for accounts
-        $urlTrades = 'https://my.vestrado.com/rest/trades';
-
-        // Set the headers
-        $headers = [
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer 9083b30e232b13336f9f6aa64bb753221d6d5d4ba1ebe441d4d78c521522f78d145110b7bc30a23016a5bbd12f561fb6225b10438bf428d0888d5b13',
-        ];
-
-        // Set the body for accounts
-        $todayDate = now()->format('Y-m-d H:i:s');
-        $body = [
-            'userId' => $id,
-            'openDate' => [
-                'begin' => '2025-01-01 00:00:00'
-            ],
-            'closeDate' => [
-                'end' => $todayDate
-            ],
-            'closeDate' => [
-                'end' => $todayDate
-            ],
-            'ticketType' => [ // Add the ticketType array here
-                'buy',
-                'sell'
-            ],
-            'orders' => [
-                [
-                    'field' => 'closeDate',
-                    'direction' => 'DESC'
-                ]
-            ],
-            'segment' => [
-                'limit' => 10000
-            ]
-        ];
-
-        // Send the POST request for accounts
-        $responseAccounts = Http::withHeaders($headers)->post($urlTrades, $body);
-
-        if ($responseAccounts->successful()) {
-            $datatrade = $responseAccounts->json();
-
-
-            return $datatrade;
-        }
-
-        return null;
-    }
-
-    private function fetchbalance($id,$loginid)
-    {
-        // Define the API URL for accounts
-        $urlTrades = 'https://my.vestrado.com/rest/accounts/trade-statistic';
-
-        // Set the headers
-        $headers = [
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer 9083b30e232b13336f9f6aa64bb753221d6d5d4ba1ebe441d4d78c521522f78d145110b7bc30a23016a5bbd12f561fb6225b10438bf428d0888d5b13',
-        ];
-
-        // Set the body for accounts
-        //$todayDate = now()->format('Y-m-d H:i:s');
-        $body = [
-            'userId' => $id,
-            'login' => $loginid
-        ];
-
-        // Send the POST request for accounts
-        $responseBalance = Http::withHeaders($headers)->post($urlTrades, $body);
-
-        if ($responseBalance->successful()) {
-            $dataBalance = $responseBalance->json();
-
-
-            return $dataBalance;
-        }
-
-        return null;
-    }
-
     public function index()
     {
         if (session('loadid')) {
-            $data = $this->fetchUserDetails(session('loadid'));
-            $datatrade = $this->fetchtrade('19294');
+            $data = $this->userService->fetchUserDetails(session('loadid'));
+            $datatrade = $this->userService->fetchtrade(session('loadid'));
 
             $totalVolume = collect($datatrade)->sum('volume');
             $totalVolume = round(collect($datatrade)->sum('volume'), 2);
@@ -152,8 +47,9 @@ class loginController extends Controller
     {
         if (session('loadid')) {
             $id=session('loadid');
-            $data = $this->fetchUserDetails(session('loadid'));
-            $datatrade = $this->fetchtrade(session('loadid'));
+
+            $data = $this->userService->fetchUserDetails(session('loadid'));
+            $datatrade = $this->userService->fetchtrade(session('loadid'));
 
 
 
@@ -192,7 +88,7 @@ class loginController extends Controller
             //     ]);
             // }
 
-            $databalance = $this->fetchbalance(session('loadid'),$loginID);
+            $databalance = $this->userService->fetchbalance(session('loadid'),$loginID);
             $balance = collect($databalance)->pluck('tradeBalance')->first();
 
             if ($data) {

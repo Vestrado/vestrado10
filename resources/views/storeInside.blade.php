@@ -128,10 +128,12 @@
             </div>
         </div>
         <div class="mt-6 flex space-x-4">
+            @if(isset($islogin) && $islogin)
             <button id="getThisBtn"
             class="px-6 py-2 bg-black text-white rounded-md " >
             GET THIS
             </button>
+            @endif
             <button onclick="(window.location.href) = '{{ route('store') }}';" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-md">
             BACK
             </button>
