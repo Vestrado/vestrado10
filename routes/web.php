@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\testController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\storeController;
+use App\Http\Controllers\cartController;
+use App\Http\Controllers\orderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +26,18 @@ use App\Http\Controllers\storeController;
 //Route::get('/test', [testController::class, 'index'])->name('test');
 Route::get('/home', [loginController::class, 'index'])->name('login');
 Route::post('/loginprocess', [loginController::class, 'loginprocess'])->name('login.process');
-Route::get('/store', [loginController::class, 'store'])->name('store');
-Route::get('/', [loginController::class, 'store'])->name('store');
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 
-Route::get('/storeinside', [storeController::class, 'index'])->name('store.inside');
+//store
+Route::get('/store', [loginController::class, 'store'])->name('store');
+Route::get('/', [loginController::class, 'store'])->name('store');
+Route::get('/product', [storeController::class, 'index'])->name('product.detail');
+
+//cart
+Route::get('/cart', [cartController::class, 'index'])->name('cart.index');
+
+//order
+Route::get('/orderhistory', [orderController::class, 'history'])->name('order.history');
 
 Route::get('/tradedetails-{id}', [loginController::class, 'details'])->name('trades.details');

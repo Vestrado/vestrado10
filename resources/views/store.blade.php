@@ -9,7 +9,7 @@
         <ul class="flex gap-6 text-sm font-semibold">
             <li class="w-auto border-2 border-black p-2 rounded-lg bg-black">
                 <a
-                    href="index.html"
+                    href="#"
                     class="py-2 text-white"
                     >All Merchandising</a
                 >
@@ -18,7 +18,7 @@
             <li
                 class="hover:border-2 hover:border-black p-2 hover:rounded-lg hover:bg-black">
                 <a
-                    href="purchase.html"
+                    href="{{ route('order.history') }}"
                     class="py-2 text-black hover:text-white"
                     >Purchase History</a
                 >
@@ -26,7 +26,7 @@
             <li
                 class="hover:border-2 hover:border-black p-2 hover:rounded-lg hover:bg-black">
                 <a
-                    href="Shopping.html"
+                    href="{{ route('cart.index') }}"
                     class="py-2 text-black hover:text-white"
                     >Shopping Cart</a
                 >
@@ -39,7 +39,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Card Produk 1 -->
         <div class="bg-white rounded-lg shadow p-4">
-            <a href="{{ route('store.inside') }}">
+            <a href="{{ route('product.detail') }}">
                 <img
                     src="assets/images/Thumb1_Campus.png"
                     alt="Vestrado Hoodie"
