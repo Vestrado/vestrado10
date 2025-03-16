@@ -5,23 +5,23 @@
 <main class=" grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="bg-white p-6 rounded-lg shadow">
         <img
-        src="assets/images/Thumb1_Campus.png"
+        src="assets/images/{{ $product->prod_img }}"
         alt="Hoodie"
         class="w-full h-50 object-cover rounded-md mb-4" />
         <div class="flex space-x-2">
             <img
-            src="assets/images/Thumb1_Campus.png"
+            src="assets/images/{{ $product->prod_img }}"
             class="w-20 h-20 rounded-md cursor-pointer" />
             <img
-            src="assets/images/Thumb1_Campus.png"
+            src="assets/images/{{ $product->prod_img }}"
             class="w-20 h-20 rounded-md cursor-pointer" />
             <img
-            src="assets/images/Thumb1_Campus.png"
+            src="assets/images/{{ $product->prod_img }}"
             class="w-20 h-20 rounded-md cursor-pointer" />
         </div>
     </div>
     <div class="bg-white p-6 rounded-lg ">
-        <h2 class="text-2xl font-bold">Vestrado Campus Hoodie</h2>
+        <h2 class="text-2xl font-bold">{{ $product->prod_name ?? 'N/A' }}</h2>
         <div class="flex items-center mb-1">
             <div class="flex items-center mb-1">
                 <!-- Rating (bintang) -->
@@ -111,7 +111,7 @@
             300 Points / 50 Lots
         </p>
         <p class="text-gray-600 mt-2">
-            Introducing the Vestrado Cypher Sweatshirt...
+            {{ $product->prod_desc }}
         </p>
         <p class="text-sm text-gray-500 mt-2">Materials: Cotton</p>
         <p class="text-sm text-gray-500">Product SKU: 287364</p>

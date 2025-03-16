@@ -39,7 +39,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Card Produk 1 -->
         <div class="bg-white rounded-lg shadow p-4">
-            <a href="{{ route('product.detail') }}">
+            <a href="{{ route('product.detail', ['id' => '1']) }}">
                 <img
                     src="assets/images/Thumb1_Campus.png"
                     alt="Vestrado Hoodie"
@@ -136,7 +136,7 @@
 
         <!-- Card Produk 2 -->
         <div class="bg-white rounded-lg shadow p-4">
-            <a href="/halaman2.html">
+            <a href="{{ route('product.detail', ['id' => '2']) }}">
                 <img
                     src="assets/images/SweatsThumb_Cypher.png"
                     alt="Vestrado Cypher Sweat Shirt"

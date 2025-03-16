@@ -18,8 +18,13 @@ class storeController extends Controller
         $this->userService = $userService;
     }
 
-    public function index()
+    public function index($id)
     {
+        $productInfo = DB::table('product')->where('prod_id', $id)->first();
+        if (!$productInfo) {
+            return redirect()->back()->with('error', 'Product not found');
+        }
+
         if (session('loadid')) {
             $data = $this->userService->fetchUserDetails(session('loadid'));
             $datatrade = $this->userService->fetchtrade(session('loadid'));
@@ -35,6 +40,7 @@ class storeController extends Controller
 
             if ($data) {
                 return view('storeInside', [
+                    'product' => $productInfo,
                     'datauser' => $data,
                     'totalVolume' => $totalVolume,
                     'loginID' => $loginID,
@@ -45,7 +51,9 @@ class storeController extends Controller
                 return redirect()->route('login')->with('error', 'Failed to fetch user details');
             }
         } else {
-            return view('storeInside');
+            return view('storeInside', [
+                'product' => $productInfo,
+            ]);
         }
     }
 }

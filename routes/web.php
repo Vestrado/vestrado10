@@ -32,7 +32,7 @@ Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 //store
 Route::get('/store', [loginController::class, 'store'])->name('store');
 Route::get('/', [loginController::class, 'store'])->name('store');
-Route::get('/product', [storeController::class, 'index'])->name('product.detail');
+Route::get('/product-{id}', [storeController::class, 'index'])->name('product.detail');
 
 //cart
 Route::get('/cart', [cartController::class, 'index'])->name('cart.index');
