@@ -108,7 +108,7 @@
             </div>
         </div>
         <p class="text-green-600 font-semibold text-lg">
-            300 Points / 50 Lots
+            {{ $product->pts }} Points / {{ $product->lots }} Lots
         </p>
         <p class="text-gray-600 mt-2">
             {{ $product->prod_desc }}
@@ -117,15 +117,6 @@
         <p class="text-sm text-gray-500">Product SKU: {{ $product->sku }}</p>
         <div class="mt-4">
             <h3 class="font-semibold">Select Size</h3>
-            {{-- <div class="flex space-x-2 mt-2">
-                <button class="border px-3 py-1 rounded-md">XS</button>
-                <button class="border px-3 py-1 rounded-md">S</button>
-                <button class="border px-3 py-1 rounded-md">M</button>
-                <button class="border px-3 py-1 rounded-md">L</button>
-                <button class="border px-3 py-1 rounded-md">XL</button>
-                <button class="border px-3 py-1 rounded-md">2XL</button>
-                <button class="border px-3 py-1 rounded-md">3XL</button>
-            </div> --}}
             <div class="flex space-x-2 mt-2">
                 @if (!empty($sizes))
                     @foreach ($sizes as $size)

@@ -21,6 +21,8 @@ class loginController extends Controller
     /***************** START HERE ***********/
     public function index()
     {
+        $products = DB::connection('vestrado')->table('product')->get();
+
         if (session('loadid')) {
             $data = $this->userService->fetchUserDetails(session('loadid'));
             $datatrade = $this->userService->fetchtrade(session('loadid'));
@@ -28,18 +30,20 @@ class loginController extends Controller
             $totalVolume = collect($datatrade)->sum('volume');
             $totalVolume = round(collect($datatrade)->sum('volume'), 2);
 
-
             if ($data) {
                 return view('store', [
                     'datauser' => $data, // User details
                     'totalVolume' => $totalVolume,
                     'islogin' => true,
+                    'products' => $products,
                 ]);
             } else {
                 return redirect()->route('login')->with('error', 'Failed to fetch user details');
             }
         } else {
-            return view('store');
+            return view('store', [
+                'products' => $products,
+            ]);
         }
     }
 
