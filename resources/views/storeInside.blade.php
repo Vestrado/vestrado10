@@ -113,11 +113,11 @@
         <p class="text-gray-600 mt-2">
             {{ $product->prod_desc }}
         </p>
-        <p class="text-sm text-gray-500 mt-2">Materials: Cotton</p>
-        <p class="text-sm text-gray-500">Product SKU: 287364</p>
+        <p class="text-sm text-gray-500 mt-2">Materials: {{ $product->material }}</p>
+        <p class="text-sm text-gray-500">Product SKU: {{ $product->sku }}</p>
         <div class="mt-4">
             <h3 class="font-semibold">Select Size</h3>
-            <div class="flex space-x-2 mt-2">
+            {{-- <div class="flex space-x-2 mt-2">
                 <button class="border px-3 py-1 rounded-md">XS</button>
                 <button class="border px-3 py-1 rounded-md">S</button>
                 <button class="border px-3 py-1 rounded-md">M</button>
@@ -125,6 +125,15 @@
                 <button class="border px-3 py-1 rounded-md">XL</button>
                 <button class="border px-3 py-1 rounded-md">2XL</button>
                 <button class="border px-3 py-1 rounded-md">3XL</button>
+            </div> --}}
+            <div class="flex space-x-2 mt-2">
+                @if (!empty($sizes))
+                    @foreach ($sizes as $size)
+                        <button class="border px-3 py-1 rounded-md">{{ $size }}</button>
+                    @endforeach
+                @else
+                    <p>No sizes available</p>
+                @endif
             </div>
         </div>
         <div class="mt-6 flex space-x-4">

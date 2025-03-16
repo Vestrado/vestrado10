@@ -21,9 +21,13 @@ class storeController extends Controller
     public function index($id)
     {
         $productInfo = DB::connection('vestrado')->table('product')->where('prod_id', $id)->first();
+
         if (!$productInfo) {
             return redirect()->back()->with('error', 'Product not found');
         }
+
+        // Split sizes and handle empty/null case
+        $sizes = $productInfo->size ? array_map('trim', explode(',', $productInfo->size)) : [];
 
         if (session('loadid')) {
             $data = $this->userService->fetchUserDetails(session('loadid'));
@@ -41,6 +45,7 @@ class storeController extends Controller
             if ($data) {
                 return view('storeInside', [
                     'product' => $productInfo,
+                    'sizes' => $sizes,
                     'datauser' => $data,
                     'totalVolume' => $totalVolume,
                     'loginID' => $loginID,
@@ -53,6 +58,7 @@ class storeController extends Controller
         } else {
             return view('storeInside', [
                 'product' => $productInfo,
+                'sizes' => $sizes,
             ]);
         }
     }
