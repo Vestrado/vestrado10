@@ -20,7 +20,7 @@ class storeController extends Controller
 
     public function index($id)
     {
-        $productInfo = DB::table('product')->where('prod_id', $id)->first();
+        $productInfo = DB::connection('vestrado')->table('product')->where('prod_id', $id)->first();
         if (!$productInfo) {
             return redirect()->back()->with('error', 'Product not found');
         }
