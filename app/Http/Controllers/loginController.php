@@ -49,6 +49,7 @@ class loginController extends Controller
 
     public function store()
     {
+        $products = DB::connection('vestrado')->table('product')->get();
         if (session('loadid')) {
             $id=session('loadid');
 
@@ -102,6 +103,7 @@ class loginController extends Controller
                     'loginID' => $loginID,
                     'balance' => $balance,
                     'islogin' => true,
+                    'products' => $products,
                 ]);
             } else {
                 return redirect()->route('login')->with('error', 'Failed to fetch user details');
