@@ -363,7 +363,11 @@
                   <p class="text-xs text-gray-500 ">(My Current Lots: <strong>{{ number_format($totalVolume ?? 0, 2) }}Lots</strong>)</p>
                 </div>
             </div>
-            <button onclick="closeModal()" class="w-full bg-black text-white py-2 mt-4 rounded-lg text-center hover:bg-gray-800 transition">PLACE ORDER</button>
+            <form action="{{ route('cart.add') }}" method="POST">
+                @csrf
+                <input type="hidden" name="prod_id" value="{{ $product->prod_id }}">
+                <button onclick="closeModal()" class="w-full bg-black text-white py-2 mt-4 rounded-lg text-center hover:bg-gray-800 transition">PLACE ORDER</button>
+            </form>
         </div>
       </div>
       <script>

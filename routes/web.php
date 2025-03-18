@@ -24,6 +24,7 @@ use App\Http\Controllers\orderController;
 // });
 
 //Route::get('/test', [testController::class, 'index'])->name('test');
+// Route::get('/tradedetails-{id}', [loginController::class, 'details'])->name('trades.details');
 Route::get('/home', [loginController::class, 'index'])->name('login');
 Route::post('/loginprocess', [loginController::class, 'loginprocess'])->name('login.process');
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
@@ -36,8 +37,10 @@ Route::get('/product-{id}', [storeController::class, 'index'])->name('product.de
 
 //cart
 Route::get('/cart', [cartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
 
 //order
 Route::get('/orderhistory', [orderController::class, 'history'])->name('order.history');
 
-Route::get('/tradedetails-{id}', [loginController::class, 'details'])->name('trades.details');
+
