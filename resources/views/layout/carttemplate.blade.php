@@ -38,18 +38,24 @@
 				</div>
 
 				<!-- Kanan-->
-				<div class="flex items-center space-x-4">
-					<button class="text-sm font-medium hover:text-green-700">
-						Client Panel
-					</button>
-					<div class="flex items-center space-x-2">
-						<img
-							class="w-8 h-8 rounded-full object-cover"
-							src="assets/images/profil.png"
-							alt="User Photo" />
-						<span class="text-sm">Brooklyn (12398)</span>
-					</div>
-				</div>
+				@if(isset($islogin) && $islogin)
+                    <div class="flex items-center space-x-4">
+                        <button class="text-sm font-medium hover:text-green-700">
+                            Client Panel
+                        </button>
+                        <div class="flex items-center space-x-2">
+                            <img
+                                class="w-8 h-8 rounded-full object-cover"
+                                src="assets/images/profil.png"
+                                alt="User Photo" />
+                            <span class="text-sm">{{ $datauser['firstName'] }} {{ $datauser['lastName'] }} ({{session('loadid')}})</span>
+                        </div>
+                    </div>
+                @else
+                    <div class="flex items-center space-x-4">
+                        &nbsp;
+                    </div>
+                @endif
 			</header>
 
 			<!--  Konten -->
@@ -94,35 +100,62 @@
 					class="w-80 bg-[#EEEEEE] border-l border-gray-200 p-4 space-y-8 hidden lg:block">
 					<!-- Loyalty Summary -->
 					<div class="bg-[#1C1C1C] p-4 space-y-8 rounded-xl">
-						<h2 class="text-sm font-semibold text-white mb-2">
-							Loyalty Summary
-						</h2>
-						<p class="text-sm text-white">
-							Total Points
-							<span class="float-right text-white font-bold">6700 Pts</span>
-						</p>
-						<p class="text-sm text-white">
-							Lots Collected
-							<span class="float-right text-white font-bold">67 Lots</span>
-						</p>
-						<p class="text-sm text-white">
-							Your Ranking
-							<span class="float-right text-white font-bold">Bronze</span>
-						</p>
+						@if(isset($islogin) && $islogin)
+                            <h2 class="text-sm font-semibold text-white mb-2">
+                            Loyalty Summary
+                            </h2>
+                            <p class="text-sm text-white">
+                                Total Points
+                                <span class="float-right text-white font-bold">6700 Pts</span>
+                            </p>
+                            <p class="text-sm text-white">
+                                Lots Collected
+                                <span class="float-right text-white font-bold"> {{ number_format($totalVolume ?? 0, 2) }} Lots</span>
+                            </p>
+                            <p class="text-sm text-white">
+                                Your Ranking
+                                <span class="float-right text-white font-bold">Bronze</span>
+                            </p>
+
+                            <a href="{{ route('logout') }}" class="btn">Logout</a>
+                        @else
+                            <!-- Display login form if not logged in -->
+                            <form method="post" action="{{ route('login.process') }}">
+                                @csrf <!-- This directive is important for CSRF protection -->
+                                <h2 class="text-xl font-bold text-white mb-2">
+                                    Login
+                                </h2>
+                                <p class="text-sm text-white">
+                                    <span class="text-sm">Email</span><br>
+
+                                    <input type="text" name="email" value="" class="form-control" style="color:black;width:250px;height:30px;padding-left:5px;">
+                                </p>
+                                <br>
+                                <p class="text-sm text-white">
+                                    <span class="text-sm">Password</span><br>
+                                    <input type="password" name="password" value="" class="form-control" style="color:black;width:250px;height:30px;padding-left:5px;">
+                                </p>
+                                <br>
+                                <p class="text-sm text-white">
+                                    <button type="submit" class="btn">Submit</button>
+                                </p>
+                            </form>
+                        @endif
 					</div>
 
 					<!-- Balance Info -->
+                    @if(isset($islogin) && $islogin)
 					<div class="bg-[#1C1C1C] p-4 rounded-xl space-y-2">
 						<div class="space-y-8">
 							<div
 								class="w-40 h-14 bg-black flex rounded-full items-center px-4">
 								<p class="text-sm text-white font-medium">
-									Live Account (5231)
+									Live Account ({{ $loginID }})
 								</p>
 							</div>
 							<div>
 								<p class="text-sm text-white">Balance</p>
-								<p class="text-xl text-white font-bold">$2,882.78</p>
+								<p class="text-xl text-white font-bold">$ {{ number_format($balance ?? 0, 2) }}</p>
 							</div>
 						</div>
 					</div>
@@ -194,6 +227,7 @@
 							</button>
 						</div>
 					</div>
+                    @endif
 				</aside>
 			</div>
 
