@@ -120,17 +120,24 @@
             <div class="flex space-x-2 mt-2">
                 @if (!empty($sizes))
                     @foreach ($sizes as $size)
-                        <button class="border px-3 py-1 rounded-md">{{ $size }}</button>
+                        <button
+                        class="border px-3 py-1 rounded-md size-btn"
+                        data-size="{{ $size }}"
+                        onclick="selectSize(this, '{{ $size }}')">
+                        {{ $size }}
+                        </button>
                     @endforeach
                 @else
                     <p>No sizes available</p>
                 @endif
+                <input type="hidden" id="selectedSize" value="">
             </div>
         </div>
         <div class="mt-6 flex space-x-4">
             @if(isset($islogin) && $islogin)
             <button id="getThisBtn"
-            class="px-6 py-2 bg-black text-white rounded-md " >
+            class="px-6 py-2 bg-black text-white rounded-md"
+            onclick="openModalWithSize('{{ $product->prod_name }}', '{{ $product->prod_id }}', '{{ $product->pts ?? 'N/A' }}', '{{ $product->lots ?? 'N/A' }}', '{{ $product->prod_img ?? 'assets/images/default.png' }}', '{{ $product->sku ?? 'N/A' }}')">
             GET THIS
             </button>
             @endif

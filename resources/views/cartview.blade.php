@@ -3,6 +3,7 @@
 @section('main-content')
 <!-- Grid Product -->
 <div class="flex flex-col gap-6">
+    @if ($cartItems->isNotEmpty())
     <!-- Card Produk 1 -->
     <div class="p-6 rounded-lg shadow-lg">
         <div class="flex rounded-lg justify-between">
@@ -12,7 +13,7 @@
                 </h2>
                 <div class="flex justify-between text-sm text-gray-700">
                     <span>Subtotal</span>
-                    <span>660PTS/400LOTS</span>
+                    <span>{{ number_format($totalPts) }} PTS/ {{ number_format($totalLots) }} LOTS</span>
                 </div>
                 <div class="flex justify-between text-sm text-gray-700 mt-2">
                     <span>Delivery Fee</span>
@@ -21,23 +22,23 @@
                 <div
                     class="flex justify-between text-lg font-bold text-gray-900 mt-4">
                     <span>Total</span>
-                    <span>660PTS/400LOTS</span>
+                    <span>{{ number_format($totalPts) }} PTS/ {{ number_format($totalLots) }} LOTS</span>
                 </div>
             </div>
             <div class="flex flex-col items-center space-y-6">
                 <button
                     class="p-2 w-full h-full border border-black bg-black text-white rounded-lg">
-                    CHECKOUT (800PTS)
+                    CHECKOUT ( {{ number_format($totalPts) }} PTS)
                 </button>
                 <button
                     class="p-2 w-full h-full border border-black text-black rounded-lg">
-                    CHECKOUT (500LOTS)
+                    CHECKOUT ( {{ number_format($totalLots) }} LOTS)
                 </button>
             </div>
         </div>
     </div>
     <!-- Card Produk  -->
-    @if ($cartItems->isNotEmpty())
+
 
         @foreach ($cartItems as $item)
             <div class="w-full mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
@@ -55,11 +56,10 @@
                 </div>
                 <div class="mt-4 grid grid-cols-2 gap-y-2 text-sm text-gray-700">
                     <p class="font-medium text-gray-900">Size:</p>
-                    <select class="border p-1 rounded-lg">
-                        <option>S</option>
-                        <option>M</option>
-                        <option>L</option>
-                    </select>
+                    <input
+                        type="text"
+                        value="{{ $item->size }}"
+                        class="border p-1 rounded-lg w-12 text-center" readonly />
                     <p class="font-medium text-gray-900">Quantity:</p>
                     <input
                         type="number"

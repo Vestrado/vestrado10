@@ -52,6 +52,13 @@
 .switch input[type="checkbox"] {
   display: none;
 }
+
+.size-btn {
+    transition: all 0.2s ease;
+}
+.size-btn.bg-blue-500 {
+    border-color: #3b82f6;
+}
     </style>
   </head>
   <body class="bg-gray-50 text-gray-800 font-sans">
@@ -332,14 +339,14 @@
             <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">&times;</button>
             <div class="flex gap-4 items-center">
                 <div>
-                    <img src="assets/images/Thumb1_Campus.png" alt="Hoodie" class="w-40 h-40 rounded-md mb-4">
+                    <img id="modalImage" src="assets/images/{{ $product->prod_img }}" alt="" class="w-40 h-40 rounded-md mb-4">
                 </div>
                 <div>
-                    <h2 class="text-lg font-semibold">Vestrado Campus Hoodie</h2>
-                    <p class="text-gray-500 text-sm">SKU: 928633</p>
-                    <p class="text-gray-500 text-sm">Size: XXL</p>
+                    <h2 id="modalProductName" class="text-lg font-semibold">Vestrado Campus Hoodie</h2>
+                    <p id="modalSku" class="text-gray-500 text-sm">SKU: 928633</p>
+                    <p id="modalSize" class="text-gray-500 text-sm">Size: XXL</p>
                     <p class="text-gray-500 text-sm">Color: Black</p>
-                    <p class="font-bold text-lg mt-2">300PTS / 50LOTS</p>
+                    <p id="modalPrice" class="font-bold text-lg mt-2">300PTS / 50LOTS</p>
                 </div>
             </div>
             <div class="mt-4 flex">
@@ -366,17 +373,65 @@
             <form action="{{ route('cart.add') }}" method="POST">
                 @csrf
                 <input type="hidden" name="prod_id" value="{{ $product->prod_id }}">
+                <input type="hidden" name="size" id="modalSizeInput" value="">
+                <input type="hidden" name="cart_pts" value="{{ $product->pts }}">
+                <input type="hidden" name="cart_lots" value="{{ $product->lots }}">
                 <button onclick="closeModal()" class="w-full bg-black text-white py-2 mt-4 rounded-lg text-center hover:bg-gray-800 transition">PLACE ORDER</button>
             </form>
         </div>
       </div>
-      <script>
+      {{-- <script>
         document.getElementById('getThisBtn').addEventListener('click', function() {
           document.getElementById('alertModal').classList.remove('hidden');
         });
         function closeModal() {
           document.getElementById('alertModal').classList.add('hidden');
         }
-      </script>
+      </script> --}}
+        <script>
+            let selectedSize = ''; // Variable to store the selected size
+
+            function selectSize(button, size) {
+                // Remove 'selected' class from all size buttons
+                document.querySelectorAll('.size-btn').forEach(btn => {
+                    btn.classList.remove('bg-blue-500', 'text-white');
+                    btn.classList.add('border-gray-300', 'text-gray-700');
+                });
+
+                // Add 'selected' class to the clicked button
+                button.classList.remove('border-gray-300', 'text-gray-700');
+                button.classList.add('bg-blue-500', 'text-white');
+
+                // Store the selected size
+                selectedSize = size;
+                document.getElementById('selectedSize').value = size;
+            }
+
+            function openModalWithSize(productName, prodId, points, lots, image, sku) {
+            //document.getElementById('getThisBtn').addEventListener('click', function() {
+                if (!selectedSize) {
+                    alert('Please select a size before adding to cart.');
+                    return;
+                }
+
+                // Update modal content
+                 document.getElementById('modalProductName').textContent = productName;
+                // document.getElementById('modalProdId').value = prodId;
+                document.getElementById('modalSize').textContent = `Size: ${selectedSize}`;
+                document.getElementById('modalSizeInput').value = selectedSize;
+                document.getElementById('modalPrice').textContent = `${points}PTS / ${lots}LOTS`;
+                //document.getElementById('modalImage').src = image;
+                document.getElementById('modalSku').textContent = `SKU: ${sku}`;
+
+                // Show the modal
+                document.getElementById('alertModal').classList.remove('hidden');
+
+            }
+
+            function closeModal() {
+                // Hide the modal
+                document.getElementById('alertModal').classList.add('hidden');
+            }
+        </script>
   </body>
 </html>

@@ -22,10 +22,21 @@ class cartController extends Controller
                 ->select('carts.*', 'product.prod_name', 'product.lots', 'product.pts', 'product.prod_img')
                 ->get();
 
+            // Calculate total points and lots
+            $totalPts = $cartItems->sum(function ($item) {
+                return $item->pts * $item->quantity;
+            });
+
+            $totalLots = $cartItems->sum(function ($item) {
+                return $item->lots * $item->quantity;
+            });
+
             return view('cartview', [
                 'islogin' => true,
                 'products' => $products,
                 'cartItems' => $cartItems, // Pass cart items to view
+                'totalPts' => $totalPts,
+                'totalLots' => $totalLots,
             ]);
         }
         else
@@ -42,6 +53,9 @@ class cartController extends Controller
 
         $userId = session('loadid');
         $prodId = $request->input('prod_id');
+        $size = $request->input('size');
+        $cart_pts = $request->input('cart_pts');
+        $cart_lots = $request->input('cart_lots');
 
         // Check if the product exists
         $product = DB::connection('vestrado')->table('product')->where('prod_id', $prodId)->first();
@@ -53,6 +67,7 @@ class cartController extends Controller
         $cartItem = DB::connection('vestrado')->table('carts')
             ->where('user_id', $userId)
             ->where('prod_id', $prodId)
+            ->where('size', $size)
             ->first();
 
         if ($cartItem) {
@@ -60,6 +75,7 @@ class cartController extends Controller
             DB::connection('vestrado')->table('carts')
                 ->where('user_id', $userId)
                 ->where('prod_id', $prodId)
+                ->where('size', $size)
                 ->increment('quantity');
         } else {
             // Add new item to cart
@@ -67,6 +83,9 @@ class cartController extends Controller
                 'user_id' => $userId,
                 'prod_id' => $prodId,
                 'quantity' => 1,
+                'size' => $size,
+                'cart_pts' => $cart_pts,
+                'cart_lots' => $cart_lots,
             ]);
         }
 
