@@ -34,6 +34,9 @@
                     class="p-2 w-full h-full border border-black text-black rounded-lg">
                     CHECKOUT ( {{ number_format($totalLots) }} LOTS)
                 </button>
+                <a href="{{ route('cart.address') }}"
+                class="p-2 w-full h-full border border-black bg-black text-white rounded-lg">CHECKOUT
+                </a>
             </div>
         </div>
     </div>

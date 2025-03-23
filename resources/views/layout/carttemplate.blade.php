@@ -83,7 +83,7 @@
 							</li>
 							<li class="w-auto border-2 border-black p-2 rounded-lg bg-black">
 								<a
-									href="#"
+									href="{{ route('cart.index') }}"
 									class="py-2 text-white"
 									>Shopping Cart</a
 								>

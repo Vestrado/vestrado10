@@ -131,4 +131,215 @@ class cartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Product removed from cart!');
     }
 
+    public function cartaddress()
+    {
+        if (session('loadid')) {
+            $data = $this->userService->fetchUserDetails(session('loadid'));
+            $datatrade = $this->userService->fetchtrade(session('loadid'));
+
+            $totalVolume = collect($datatrade)->sum('volume');
+            $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+
+            $loginID = collect($datatrade)->pluck('login')->first();
+
+            $databalance = $this->userService->fetchbalance(session('loadid'),$loginID);
+            $balance = collect($databalance)->pluck('tradeBalance')->first();
+
+            $id = session('loadid');
+            // Fetch products
+            $products = DB::connection('vestrado')->table('product')->get();
+
+            // Fetch cart items for the current user
+            $cartItems = DB::connection('vestrado')->table('carts')
+                ->where('user_id', $id)
+                ->join('product', 'carts.prod_id', '=', 'product.prod_id')
+                ->select('carts.*', 'product.prod_name', 'product.lots', 'product.pts', 'product.prod_img')
+                ->get();
+
+            // Calculate total points and lots
+            $totalPts = $cartItems->sum(function ($item) {
+                return $item->pts * $item->quantity;
+            });
+
+            $totalLots = $cartItems->sum(function ($item) {
+                return $item->lots * $item->quantity;
+            });
+
+            return view('cartaddress', [
+                'datauser' => $data,
+                'totalVolume' => $totalVolume,
+                'loginID' => $loginID,
+                'balance' => $balance,
+                'islogin' => true,
+                'products' => $products,
+                'cartItems' => $cartItems, // Pass cart items to view
+                'totalPts' => $totalPts,
+                'totalLots' => $totalLots,
+            ]);
+        }
+        else
+        {
+            return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
+        }
+    }
+
+    public function cartreview(Request $request)
+    {
+        if (session('loadid')) {
+            $data = $this->userService->fetchUserDetails(session('loadid'));
+            $datatrade = $this->userService->fetchtrade(session('loadid'));
+
+            $totalVolume = collect($datatrade)->sum('volume');
+            $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+
+            $loginID = collect($datatrade)->pluck('login')->first();
+
+            $databalance = $this->userService->fetchbalance(session('loadid'),$loginID);
+            $balance = collect($databalance)->pluck('tradeBalance')->first();
+
+            $id = session('loadid');
+            // Fetch products
+            $products = DB::connection('vestrado')->table('product')->get();
+
+            // Fetch cart items for the current user
+            $cartItems = DB::connection('vestrado')->table('carts')
+                ->where('user_id', $id)
+                ->join('product', 'carts.prod_id', '=', 'product.prod_id')
+                ->select('carts.*', 'product.prod_name', 'product.lots', 'product.pts', 'product.prod_img')
+                ->get();
+
+            // Calculate total points and lots
+            $totalPts = $cartItems->sum(function ($item) {
+                return $item->pts * $item->quantity;
+            });
+
+            $totalLots = $cartItems->sum(function ($item) {
+                return $item->lots * $item->quantity;
+            });
+
+            $fullname = $request->input('fullname');
+            $address = $request->input('address');
+            $city = $request->input('city');
+            $postcode = $request->input('postcode');
+            $state = $request->input('state');
+            $country = $request->input('country');
+            $email = $request->input('email');
+            $phone = $request->input('phone');
+
+
+            return view('cartreview', [
+                'datauser' => $data,
+                'totalVolume' => $totalVolume,
+                'loginID' => $loginID,
+                'balance' => $balance,
+                'islogin' => true,
+                'products' => $products,
+                'cartItems' => $cartItems, // Pass cart items to view
+                'totalPts' => $totalPts,
+                'totalLots' => $totalLots,
+                'fullname' => $fullname,
+                'address' => $address,
+                'city' => $city,
+                'postcode' => $postcode,
+                'state' => $state,
+                'country' => $country,
+                'email' => $email,
+                'phone' => $phone,
+            ]);
+        }
+        else
+        {
+            return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
+        }
+    }
+
+    public function processCheckout(Request $request)
+    {
+        if (!session('loadid')) {
+            return redirect()->route('login')->with('error', 'Please log in to checkout.');
+        }
+
+        $userId = session('loadid');
+        $redemptionType = $request->input('redemption_type'); // 'points' or 'lots'
+
+        // Fetch cart items
+        $cartItems = DB::connection('vestrado')->table('carts')
+            ->where('user_id', $userId)
+            ->join('product', 'carts.prod_id', '=', 'product.prod_id')
+            ->select('carts.*', 'product.prod_name', 'product.lots', 'product.pts', 'product.prod_img')
+            ->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart')->with('error', 'Your cart is empty.');
+        }
+
+        // Calculate totals
+        $totalPts = $cartItems->sum(function ($item) {
+            return $item->pts * $item->quantity;
+        });
+        $totalLots = $cartItems->sum(function ($item) {
+            return $item->lots * $item->quantity;
+        });
+
+        // Fetch user balance
+        $datatrade = $this->userService->fetchtrade($userId);
+        $totalVolume = collect($datatrade)->map(function ($item) {
+            if ($item['currency'] === 'USC') {
+                return $item['volume'] / 1000;
+            }
+            return $item['volume'];
+        })->sum();
+        $totalVolume = round($totalVolume, 2);
+
+
+        $loginID = collect($datatrade)->pluck('login')->first();
+        $databalance = $this->userService->fetchbalance($userId, $loginID);
+        $balance = collect($databalance)->pluck('tradeBalance')->first();
+
+        // Validate balance
+        if ($redemptionType === 'points' && $balance < $totalPts) {
+            return redirect()->route('checkout')->with('error', 'Insufficient points to complete the purchase.');
+        } elseif ($redemptionType === 'lots' && $totalVolume < $totalLots) {
+            return redirect()->route('checkout')->with('error', 'Insufficient lots to complete the purchase.');
+        }
+
+        // Create the order
+        $orderId = DB::connection('vestrado')->table('orders')->insertGetId([
+            'user_id' => $userId,
+            'total_pts' => $redemptionType === 'points' ? $totalPts : 0,
+            'total_lots' => $redemptionType === 'lots' ? $totalLots : 0,
+            'redemption_type' => $redemptionType,
+            'status' => 'completed',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Save order items
+        foreach ($cartItems as $item) {
+            DB::connection('vestrado')->table('order_items')->insert([
+                'order_id' => $orderId,
+                'prod_id' => $item->prod_id,
+                'size' => $item->size,
+                'quantity' => $item->quantity,
+                'pts' => $item->pts,
+                'lots' => $item->lots,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        // Deduct balance (assuming you have an API/method to update this)
+        // For now, this is a placeholder; implement based on your userService
+        if ($redemptionType === 'points') {
+            // $this->userService->deductPoints($userId, $totalPts);
+        } else {
+            // $this->userService->deductLots($userId, $totalLots);
+        }
+
+        // Clear the cart
+        DB::connection('vestrado')->table('carts')->where('user_id', $userId)->delete();
+
+        return redirect()->route('store')->with('success', 'Order placed successfully!');
+    }
+
 }

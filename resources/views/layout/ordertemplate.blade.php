@@ -38,162 +38,31 @@
 				</div>
 
 				<!-- Kanan-->
-				<div class="flex items-center space-x-4">
-					<button class="text-sm font-medium hover:text-green-700">
-						Client Panel
-					</button>
-					<div class="flex items-center space-x-2">
-						<img
-							class="w-8 h-8 rounded-full object-cover"
-							src="assets/images/profil.png"
-							alt="User Photo" />
-						<span class="text-sm">Brooklyn (12398)</span>
-					</div>
-				</div>
+				@if(isset($islogin) && $islogin)
+                    <div class="flex items-center space-x-4">
+                        <button class="text-sm font-medium hover:text-green-700">
+                            Client Panel
+                        </button>
+                        <div class="flex items-center space-x-2">
+                            <img
+                                class="w-8 h-8 rounded-full object-cover"
+                                src="assets/images/profil.png"
+                                alt="User Photo" />
+                            <span class="text-sm">{{ $datauser['firstName'] }} {{ $datauser['lastName'] }} ({{session('loadid')}})</span>
+                        </div>
+                    </div>
+                @else
+                    <div class="flex items-center space-x-4">
+                        &nbsp;
+                    </div>
+                @endif
 			</header>
 
 			<!--  Konten -->
 			<div class="flex flex-1">
 				<!--  (Konten Tengah) -->
 				<main class="flex-1 p-4 md:p-6 lg:p-8 space-y-8">
-					<!-- Tabs -->
-					<div>
-						<ul class="flex gap-6 text-sm font-semibold">
-							<li
-								class="hover:border-2 hover:border-black p-2 hover:rounded-lg hover:bg-black">
-								<a
-									href="{{ route('store') }}"
-									class="py-2 text-black hover:text-white"
-									>All Merchandising</a
-								>
-							</li>
-							<li class="w-auto border-2 border-black p-2 rounded-lg bg-black">
-								<a
-									href="#"
-									class="py-2 text-white"
-									>Purchase History</a
-								>
-							</li>
-							<li
-								class="hover:border-2 hover:border-black p-2 hover:rounded-lg hover:bg-black">
-								<a
-									href="{{ route('cart.index') }}"
-									class="py-2 text-black hover:text-white"
-									>Shopping Cart</a
-								>
-							</li>
-						</ul>
-					</div>
-
-					<!-- Grid Product -->
-					<div class="flex flex-col gap-6">
-						<!-- Card Produk 1 -->
-						<div
-							class="flex flex-col md:flex-row p-6 bg-white shadow-lg rounded-lg w-full mx-auto">
-							<div class="w-full md:w-1/3">
-								<img
-									src="assets/images/Thumb1_4645Campus.png"
-									alt="Vestrado Cypher Baseball Cap"
-									class="w-full md:w-96 h-auto rounded-lg" />
-							</div>
-							<div class="mt-4 md:mt-0 md:ml-6 w-full md:w-2/3">
-								<p class="text-gray-500 text-sm uppercase tracking-wide">
-									Item Details
-								</p>
-								<h2 class="text-xl font-semibold text-gray-800">
-									Vestrado Cypher Baseball Cap
-								</h2>
-								<div
-									class="mt-3 grid grid-cols-2 pt-10 gap-y-2 text-sm text-gray-700">
-									<p class="font-medium text-gray-900">Size:</p>
-									<p>N/A</p>
-
-									<p class="font-medium text-gray-900">Created At:</p>
-									<p>10-10-2022 15:58</p>
-
-									<p class="font-medium text-gray-900">Order ID:</p>
-									<p>#823771</p>
-
-									<p class="font-medium text-gray-900">Paid With:</p>
-									<p>350 Pts</p>
-
-									<p class="font-medium text-gray-900">Status:</p>
-									<p class="text-green-600 font-medium">Success</p>
-								</div>
-							</div>
-						</div>
-						<!-- Card Produk 2 -->
-						<div
-							class="flex flex-col md:flex-row p-6 bg-white shadow-lg rounded-lg w-full mx-auto">
-							<div class="w-full md:w-1/3">
-								<img
-									src="assets/images/Thumb1_Camp57us.png"
-									alt="Campus Tees"
-									class="w-full md:w-96 h-auto rounded-lg" />
-							</div>
-							<div class="mt-4 md:mt-0 md:ml-6 w-full md:w-2/3">
-								<p class="text-gray-500 text-sm uppercase tracking-wide">
-									Item Details
-								</p>
-								<h2 class="text-xl font-semibold text-gray-800">
-									Vestrado Campus Tees
-								</h2>
-								<div
-									class="mt-3 grid grid-cols-2 gap-y-2 pt-10 text-sm text-gray-700">
-									<p class="font-medium text-gray-900">Size:</p>
-									<p>M</p>
-
-									<p class="font-medium text-gray-900">Created At:</p>
-									<p>10-10-2022 15:58</p>
-
-									<p class="font-medium text-gray-900">Order ID:</p>
-									<p>#823771</p>
-
-									<p class="font-medium text-gray-900">Paid With:</p>
-									<p>350 Pts</p>
-
-									<p class="font-medium text-gray-900">Status:</p>
-									<p class="text-green-600 font-medium">Success</p>
-								</div>
-							</div>
-						</div>
-						<!-- Card Produk 3 -->
-						<div
-							class="flex flex-col md:flex-row p-6 bg-white shadow-lg rounded-lg w-full mx-auto">
-							<div class="w-full md:w-1/3">
-								<img
-									src="assets/images/paragons.png"
-									alt="Campus Tees"
-									class="w-full md:w-96 h-auto rounded-lg" />
-							</div>
-							<div class="mt-4 md:mt-0 md:ml-6 w-full md:w-2/3">
-								<p class="text-gray-500 text-sm uppercase tracking-wide">
-									Item Details
-								</p>
-								<h2 class="text-xl font-semibold text-gray-800">
-									Vestrado Paragons Totebag
-								</h2>
-								<div
-									class="mt-3 grid grid-cols-2 pt-10 gap-y-2 text-sm text-gray-700">
-									<p class="font-medium text-gray-900">Size:</p>
-									<p>N/A</p>
-
-									<p class="font-medium text-gray-900">Created At:</p>
-									<p>10-10-2022 15:58</p>
-
-									<p class="font-medium text-gray-900">Order ID:</p>
-									<p>#823771</p>
-
-									<p class="font-medium text-gray-900">Paid With:</p>
-									<p>350 Pts</p>
-
-									<p class="font-medium text-gray-900">Status:</p>
-									<p class="text-red-600 font-medium">Declined</p>
-								</div>
-							</div>
-						</div>
-						<!-- ... -->
-					</div>
+                    @yield('main-content')
 				</main>
 
 				<!-- Sidebar Kanan -->

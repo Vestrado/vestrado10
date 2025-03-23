@@ -39,8 +39,12 @@ Route::get('/product-{id}', [storeController::class, 'index'])->name('product.de
 Route::get('/cart', [cartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [cartController::class, 'removeFromCart'])->name('cart.remove');
+Route::get('/cart2', [cartController::class, 'cartaddress'])->name('cart.address');
+Route::post('/checkout', [cartController::class, 'cartreview'])->name('cart.review');
+Route::post('/chkprocess', [cartController::class, 'processCheckout'])->name('checkout.process');
+
 
 //order
-Route::get('/orderhistory', [orderController::class, 'history'])->name('order.history');
+Route::get('/orderhistory', [orderController::class, 'index'])->name('order.history');
 
 
