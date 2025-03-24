@@ -62,6 +62,35 @@
 			<div class="flex flex-1">
 				<!--  (Konten Tengah) -->
 				<main class="flex-1 p-4 md:p-6 lg:p-8 space-y-8">
+                    <!-- Tabs -->
+					<div>
+						<ul class="flex gap-6 text-sm font-semibold">
+							<li
+								class="hover:border-2 hover:border-black p-2 hover:rounded-lg hover:bg-black">
+								<a
+									href="{{ route('store') }}"
+									class="py-2 text-black hover:text-white"
+									>All Merchandising</a
+								>
+							</li>
+							<li
+                                class="w-auto border-2 border-black p-2 rounded-lg bg-black">
+								<a
+									href="{{ route('order.history') }}"
+									class="py-2 text-white"
+									>Purchase History</a
+								>
+							</li>
+							<li
+                                class="hover:border-2 hover:border-black p-2 hover:rounded-lg hover:bg-black">
+								<a
+									href="{{ route('cart.index') }}"
+                                    class="py-2 text-black hover:text-white"
+									>Shopping Cart</a
+								>
+							</li>
+						</ul>
+					</div>
                     @yield('main-content')
 				</main>
 

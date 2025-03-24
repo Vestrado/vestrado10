@@ -88,6 +88,71 @@ class orderController extends Controller
         }
     }
 
+    public function orderview($orderid)
+    {
+        if (session('loadid')) {
+            $data = $this->userService->fetchUserDetails(session('loadid'));
+            $datatrade = $this->userService->fetchtrade(session('loadid'));
+
+            // $totalVolume = collect($datatrade)->sum('volume');
+            // $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            $totalVolume = collect($datatrade)->map(function ($item) {
+                if ($item['currency'] === 'USC') {
+                    return $item['volume'] / 1000;
+                }
+                return $item['volume'];
+            })->sum();
+            $totalVolume = round($totalVolume, 2);
+
+            $loginID = collect($datatrade)->pluck('login')->first();
+
+            $databalance = $this->userService->fetchbalance(session('loadid'),$loginID);
+            $balance = collect($databalance)->pluck('tradeBalance')->first();
+
+            $id = session('loadid');
+            // Fetch products
+            $products = DB::connection('vestrado')->table('product')->get();
+
+            // Fetch cart items for the current user
+            // Fetch all orders
+            $orders = DB::connection('vestrado')->table('orders')
+            ->where('id', $orderid)
+            ->select('*')
+            ->first();
+
+            // Fetch only the first item for each order using order_number
+            // $orderItems = DB::connection('vestrado')->table('order_items')
+            // ->where('order_id', $orderid)
+            // ->select('*')
+            // ->get();
+
+            $orderItems = DB::connection('vestrado')->table('order_items')
+            ->join('product', 'order_items.prod_id', '=', 'product.prod_id')
+            ->select('order_items.*', 'product.prod_name', 'product.prod_img')
+            ->where('order_id', $orderid) // Use id from orders, order_id from order_items
+            ->orderBy('order_items.id', 'asc') // Ensures consistent "first" item
+            ->get();
+
+            return view('orderview', [
+                'datauser' => $data,
+                'totalVolume' => $totalVolume,
+                'loginID' => $loginID,
+                'balance' => $balance,
+                'islogin' => true,
+                'products' => $products,
+                'orders' => $orders,
+                'orderItems' => $orderItems,
+                // 'cartItems' => $cartItems, // Pass cart items to view
+                // 'totalPts' => $totalPts,
+                // 'totalLots' => $totalLots,
+            ]);
+        }
+        else
+        {
+            return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
+        }
+    }
+
     public function history()
     {
         return view('order');

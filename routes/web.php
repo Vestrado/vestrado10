@@ -46,5 +46,6 @@ Route::post('/chkprocess', [cartController::class, 'processCheckout'])->name('ch
 
 //order
 Route::get('/orderhistory', [orderController::class, 'index'])->name('order.history');
+Route::get('/order-{orderid}', [orderController::class, 'orderview'])->name('order.detail');
 
 
