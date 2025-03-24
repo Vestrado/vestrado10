@@ -104,13 +104,13 @@
                             <h2 class="text-sm font-semibold text-white mb-2">
                             Loyalty Summary
                             </h2>
-                            <p class="text-sm text-white">
+                            {{-- <p class="text-sm text-white">
                                 Total Points
                                 <span class="float-right text-white font-bold">6700 Pts</span>
-                            </p>
+                            </p> --}}
                             <p class="text-sm text-white">
-                                Lots Collected
-                                <span class="float-right text-white font-bold"> {{ number_format($totalVolume ?? 0, 2) }} Lots</span>
+                                Total Points
+                                <span class="float-right text-white font-bold"> {{ number_format($totalVolume ?? 0, 2) }} Pts</span>
                             </p>
                             <p class="text-sm text-white">
                                 Your Ranking

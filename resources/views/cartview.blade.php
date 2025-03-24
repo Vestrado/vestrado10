@@ -13,7 +13,7 @@
                 </h2>
                 <div class="flex justify-between text-sm text-gray-700">
                     <span>Subtotal</span>
-                    <span>{{ number_format($totalPts) }} PTS/ {{ number_format($totalLots) }} LOTS</span>
+                    <span> {{ number_format($totalLots) }} PTS</span>
                 </div>
                 <div class="flex justify-between text-sm text-gray-700 mt-2">
                     <span>Delivery Fee</span>
@@ -22,20 +22,20 @@
                 <div
                     class="flex justify-between text-lg font-bold text-gray-900 mt-4">
                     <span>Total</span>
-                    <span>{{ number_format($totalPts) }} PTS/ {{ number_format($totalLots) }} LOTS</span>
+                    <span> {{ number_format($totalLots) }} PTS</span>
                 </div>
             </div>
             <div class="flex flex-col items-center space-y-6">
-                <button
+                {{-- <button
                     class="p-2 w-full h-full border border-black bg-black text-white rounded-lg">
                     CHECKOUT ( {{ number_format($totalPts) }} PTS)
                 </button>
                 <button
                     class="p-2 w-full h-full border border-black text-black rounded-lg">
                     CHECKOUT ( {{ number_format($totalLots) }} LOTS)
-                </button>
+                </button> --}}
                 <a href="{{ route('cart.address') }}"
-                class="p-2 w-full h-full border border-black bg-black text-white rounded-lg">CHECKOUT
+                class="p-2 w-full border border-black bg-black text-white rounded-lg">CHECKOUT
                 </a>
             </div>
         </div>
@@ -49,39 +49,29 @@
                     <img
                         src="assets/images/{{ $item->prod_img }}"
                         alt="Cypher Baseball Cap"
-                        class="w-64 rounded-lg" />
+                        class="w-56 rounded-lg" />
                     <div>
                         <h3 class="text-md font-semibold text-gray-900">
                             {{ $item->prod_name }}
                         </h3>
-                        <p class="text-sm text-gray-700">{{ $item->pts }} PTS / {{ $item->lots }}LOTS</p>
+                        <p class="text-sm text-gray-700"> {{ $item->lots }}PTS</p>
+
+                        <p class="font-medium text-gray-900">Size:</p>
+                        <input type="text" value="{{ $item->size }}" class="border p-1 rounded-lg text-center" readonly />
+                        <p class="font-medium text-gray-900">Quantity:</p>
+                        <input type="text" value="{{ $item->quantity }}" class="border p-1 rounded-lg text-center" readonly />
+                        <br><br>
+                        <form action="{{ route('cart.remove') }}" method="POST">
+                            @csrf
+                            <button class="w-1/2 p-2 bg-black text-white rounded-lg" style="width:100%">
+                                REMOVE
+                            </button>
+                            <input type="hidden" name="prod_id" value="{{ $item->prod_id }}">
+                        </form>
                     </div>
                 </div>
-                <div class="mt-4 grid grid-cols-2 gap-y-2 text-sm text-gray-700">
-                    <p class="font-medium text-gray-900">Size:</p>
-                    <input
-                        type="text"
-                        value="{{ $item->size }}"
-                        class="border p-1 rounded-lg w-12 text-center" readonly />
-                    <p class="font-medium text-gray-900">Quantity:</p>
-                    <input
-                        type="number"
-                        value="{{ $item->quantity }}"
-                        class="border p-1 rounded-lg w-12 text-center" readonly />
-                </div>
-                <div class="flex mt-4 space-x-2">
-                    <button
-                        class="w-1/2 p-2 text-gray-900 border border-black rounded-lg">
-                        MAKE FAVOURITE
-                    </button>
-                    <form action="{{ route('cart.remove') }}" method="POST">
-                        @csrf
-                        <button class="w-1/2 p-2 bg-black text-white rounded-lg" style="width:100%">
-                            DELETE
-                        </button>
-                        <input type="hidden" name="prod_id" value="{{ $item->prod_id }}">
-                    </form>
-                </div>
+
+
             </div>
         @endforeach
 

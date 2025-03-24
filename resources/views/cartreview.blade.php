@@ -38,13 +38,13 @@
 
                     <div class="flex justify-between text-sm text-gray-700">
                         <span>Subtotal</span>
-                        <span>{{ number_format($totalPts) }} PTS/ {{ number_format($totalLots) }} LOTS</span>
+                        <span>{{ number_format($totalLots) }} PTS</span>
                     </div>
 
                     <div
                         class="flex justify-between text-lg font-bold text-gray-900 mt-4">
                         <span>Total</span>
-                        <span>{{ number_format($totalPts) }} PTS/ {{ number_format($totalLots) }} LOTS</span>
+                        <span>{{ number_format($totalLots) }} PTS</span>
                     </div>
                 </div>
 
@@ -88,24 +88,24 @@
                     class="p-2 w-full h-full border border-black text-black rounded-lg text-center">Back to Cart
                     </a>
                 </div>
-                <div class="flex flex-col w-1/4 rounded-lg space-y-6">
+                {{-- <div class="flex flex-col w-1/4 rounded-lg space-y-6">
                     <input type="submit" name="ttl_pts" value="Place Order ( {{ number_format($totalPts) }} PTS)"
                         class="p-2 w-full h-full border border-black bg-black text-white rounded-lg text-center">
                 </div>
                 <div class="flex flex-col w-1/4 rounded-lg space-y-6">
                         <input type="submit" name="ttl_lots" value="Place Order ( {{ number_format($totalLots) }} LOTS)"
                         class="p-2 w-full h-full border border-black bg-black text-white rounded-lg text-center">
-                </div>
+                </div> --}}
 
-                <div class="flex items-center mb-4">
+                {{-- <div class="flex items-center mb-4">
                     <input type="radio" id="points" name="redemption_type" value="points" class="mr-2" required>
                     <label for="points" class="text-sm">Redeem with Points ({{ $totalPts }} PTS)</label>
                 </div>
                 <div class="flex items-center mb-4">
                     <input type="radio" id="lots" name="redemption_type" value="lots" class="mr-2">
                     <label for="lots" class="text-sm">Redeem with Lots ({{ $totalLots }} LOTS)</label>
-                </div>
-                <button type="submit" class="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800">Confirm Order</button>
+                </div> --}}
+                <button type="submit" name="redemption_type" value="lots" class="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800">Confirm Order</button>
             </div>
         </div>
         <!-- Card Address  -->
@@ -125,7 +125,7 @@
                     <h3 class="text-md font-semibold text-gray-900">
                         {{ $item->prod_name }}
                     </h3>
-                    <p class="text-sm text-gray-700">{{ $item->pts }} PTS / {{ $item->lots }}LOTS</p>
+                    <p class="text-sm text-gray-700">{{ $item->lots }}PTS</p>
                     <p class="text-sm text-gray-700">SIZE : {{ $item->size }}</p>
                     <p class="text-sm text-gray-700">QUANTITY : {{ $item->quantity }}</p>
                 </div>

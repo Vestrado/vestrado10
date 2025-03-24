@@ -107,13 +107,13 @@
                     <h2 class="text-sm font-semibold text-white mb-2">
                     Loyalty Summary
                     </h2>
-                    <p class="text-sm text-white">
+                    {{-- <p class="text-sm text-white">
                         Total Points
                         <span class="float-right text-white font-bold">6700 Pts</span>
-                    </p>
+                    </p> --}}
                     <p class="text-sm text-white">
-                        Lots Collected
-                        <span class="float-right text-white font-bold"> {{ number_format($totalVolume ?? 0, 2) }} Lots</span>
+                        Total Points
+                        <span class="float-right text-white font-bold"> {{ number_format($totalVolume ?? 0, 2) }} Pts</span>
                     </p>
                     <p class="text-sm text-white">
                         Your Ranking
@@ -349,27 +349,27 @@
                     <p id="modalPrice" class="font-bold text-lg mt-2">300PTS / 50LOTS</p>
                 </div>
             </div>
-            <div class="mt-4 flex">
+            {{-- <div class="mt-4 flex">
 
               <label class="switch">
                 <input type="checkbox">
                 <span class="slider"></span>
-            </label>
-            <div>
-              <span class="text-sm text-gray-700 peer-checked:text-green-600">I want to redeem this merchandise using my points</span>
-              <p class="text-xs text-gray-500 ">(My Current Points: <strong>350pts</strong>)</p>
-            </div>
+              </label>
+              <div>
+                <span class="text-sm text-gray-700 peer-checked:text-green-600">I want to redeem this merchandise using my points</span>
+                <p class="text-xs text-gray-500 ">(My Current Points: <strong>350pts</strong>)</p>
+              </div>
             </div>
             <div class="mt-2 flex">
               <label class="switch">
                 <input type="checkbox">
                 <span class="slider"></span>
-            </label>
+              </label>
                 <div>
                   <span class="text-sm text-gray-700">I want to redeem this merchandise using my lots</span>
                   <p class="text-xs text-gray-500 ">(My Current Lots: <strong>{{ number_format($totalVolume ?? 0, 2) }}Lots</strong>)</p>
                 </div>
-            </div>
+            </div> --}}
             <form action="{{ route('cart.add') }}" method="POST">
                 @csrf
                 <input type="hidden" name="prod_id" value="{{ $product->prod_id }}">

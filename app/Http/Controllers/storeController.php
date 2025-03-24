@@ -34,8 +34,15 @@ class storeController extends Controller
             $datatrade = $this->userService->fetchtrade(session('loadid'));
 
 
-            $totalVolume = collect($datatrade)->sum('volume');
-            $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            // $totalVolume = collect($datatrade)->sum('volume');
+            // $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            $totalVolume = collect($datatrade)->map(function ($item) {
+                if ($item['currency'] === 'USC') {
+                    return $item['volume'] / 1000;
+                }
+                return $item['volume'];
+            })->sum();
+            $totalVolume = round($totalVolume, 2);
 
             $loginID = collect($datatrade)->pluck('login')->first();
 

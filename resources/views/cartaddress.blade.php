@@ -15,7 +15,7 @@
                     </h2>
                     <div class="flex justify-between text-sm text-gray-700">
                         <span>Subtotal</span>
-                        <span>{{ number_format($totalPts) }} PTS/ {{ number_format($totalLots) }} LOTS</span>
+                        <span>{{ number_format($totalLots) }} PTS</span>
                     </div>
                     <div class="flex justify-between text-sm text-gray-700 mt-2">
                         <span>Delivery Fee</span>
@@ -24,7 +24,7 @@
                     <div
                         class="flex justify-between text-lg font-bold text-gray-900 mt-4">
                         <span>Total</span>
-                        <span>{{ number_format($totalPts) }} PTS/ {{ number_format($totalLots) }} LOTS</span>
+                        <span> {{ number_format($totalLots) }} PTS</span>
                     </div>
                 </div>
                 <div class="flex flex-col items-center space-y-20">
@@ -44,28 +44,28 @@
 
             <div class="mt-2 grid grid-cols-2 gap-y-2 text-sm text-gray-700">
                 <p class="font-medium text-gray-900">Name:</p>
-                <input type="text" name="fullname" value="{{ $datauser['firstName'] }} {{ $datauser['lastName'] }}" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" />
+                <input type="text" name="fullname" value="{{ $datauser['firstName'] }} {{ $datauser['lastName'] }}" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" readonly/>
 
                 <p class="font-medium text-gray-900">Address:</p>
-                <input type="text" name="address" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['address'] }}" />
+                <input type="text" name="address" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['address'] }}" readonly/>
 
                 <p class="font-medium text-gray-900">City:</p>
-                <input type="text" name="city" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['city'] }}" />
+                <input type="text" name="city" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['city'] }}" readonly/>
 
                 <p class="font-medium text-gray-900">Postcode:</p>
-                <input type="text" name="postcode" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['zipCode'] }}" />
+                <input type="text" name="postcode" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['zipCode'] }}" readonly/>
 
                 <p class="font-medium text-gray-900">State:</p>
-                <input type="text" name="state" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['state'] }}" />
+                <input type="text" name="state" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['state'] }}" readonly/>
 
                 <p class="font-medium text-gray-900">Country:</p>
-                <input type="text" name="country" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['country'] }}" />
+                <input type="text" name="country" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['country'] }}" readonly/>
 
                 <p class="font-medium text-gray-900">E-mail:</p>
-                <input type="text" name="email" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['email'] }}" />
+                <input type="text" name="email" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['email'] }}" readonly/>
 
                 <p class="font-medium text-gray-900">Phone Number:</p>
-                <input type="text" name="phone" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['phone'] }}" />
+                <input type="text" name="phone" class="border p-1 rounded-lg w-12 text-left" style="width:100%;" name="address" value="{{ $datauser['phone'] }}" readonly/>
             </div>
 
         </div>

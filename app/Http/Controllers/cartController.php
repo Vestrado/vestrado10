@@ -21,8 +21,17 @@ class cartController extends Controller
             $data = $this->userService->fetchUserDetails(session('loadid'));
             $datatrade = $this->userService->fetchtrade(session('loadid'));
 
-            $totalVolume = collect($datatrade)->sum('volume');
-            $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            // $totalVolume = collect($datatrade)->sum('volume');
+            // $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            $totalVolume = collect($datatrade)->map(function ($item) {
+                if ($item['currency'] === 'USC') {
+                    return $item['volume'] / 1000;
+                }
+                return $item['volume'];
+            })->sum();
+            $totalVolume = round($totalVolume, 2);
+
+
 
             $loginID = collect($datatrade)->pluck('login')->first();
 
@@ -137,8 +146,15 @@ class cartController extends Controller
             $data = $this->userService->fetchUserDetails(session('loadid'));
             $datatrade = $this->userService->fetchtrade(session('loadid'));
 
-            $totalVolume = collect($datatrade)->sum('volume');
-            $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            // $totalVolume = collect($datatrade)->sum('volume');
+            // $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            $totalVolume = collect($datatrade)->map(function ($item) {
+                if ($item['currency'] === 'USC') {
+                    return $item['volume'] / 1000;
+                }
+                return $item['volume'];
+            })->sum();
+            $totalVolume = round($totalVolume, 2);
 
             $loginID = collect($datatrade)->pluck('login')->first();
 
@@ -189,8 +205,15 @@ class cartController extends Controller
             $data = $this->userService->fetchUserDetails(session('loadid'));
             $datatrade = $this->userService->fetchtrade(session('loadid'));
 
-            $totalVolume = collect($datatrade)->sum('volume');
-            $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            // $totalVolume = collect($datatrade)->sum('volume');
+            // $totalVolume = round(collect($datatrade)->sum('volume'), 2);
+            $totalVolume = collect($datatrade)->map(function ($item) {
+                if ($item['currency'] === 'USC') {
+                    return $item['volume'] / 1000;
+                }
+                return $item['volume'];
+            })->sum();
+            $totalVolume = round($totalVolume, 2);
 
             $loginID = collect($datatrade)->pluck('login')->first();
 
@@ -303,6 +326,15 @@ class cartController extends Controller
             return redirect()->route('checkout')->with('error', 'Insufficient lots to complete the purchase.');
         }
 
+        $fullname = $request->input('fullname');
+        $address = $request->input('address');
+        $postcode = $request->input('postcode');
+        $country = $request->input('country');
+        $email = $request->input('email');
+        $city = $request->input('city');
+        $state = $request->input('state');
+        $phone = $request->input('phone');
+
         // Create the order
         $orderId = DB::connection('vestrado')->table('orders')->insertGetId([
             'user_id' => $userId,
@@ -312,6 +344,14 @@ class cartController extends Controller
             'status' => 'completed',
             'created_at' => now(),
             'updated_at' => now(),
+            'fullname' => $fullname,
+            'address' => $address,
+            'postcode' => $postcode,
+            'country' => $country,
+            'email' => $email,
+            'city' => $city,
+            'state' => $state,
+            'phone' => $phone,
         ]);
 
         // Save order items
