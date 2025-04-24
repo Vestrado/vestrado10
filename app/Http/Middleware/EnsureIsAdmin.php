@@ -22,7 +22,7 @@ class EnsureIsAdmin
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check() || !Auth::user()->is_admin) {
-            return redirect('/login')->with('error', 'You do not have admin access.');
+            return redirect('/home')->with('error', 'You do not have admin access.');
         }
 
         return $next($request);
