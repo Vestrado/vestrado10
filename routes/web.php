@@ -57,12 +57,25 @@ Route::get('/order-{orderid}', [orderController::class, 'orderview'])->name('ord
 //     // Add a dashboard route if needed
 //     Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
 // });
-Route::get('/products/create2', [AdminProductController::class, 'create'])->middleware('admin')->name('admin.products.create');
-Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
-Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
 
+
+// Route::get('/products/create2', [AdminProductController::class, 'create'])->middleware('admin')->name('admin.products.create');
+// Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
+// Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
+
+// Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+// Route::post('/admin/login', [AdminController::class, 'login']);
+// Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('admin')->name('admin.dashboard');
+
+// Admin routes group
+Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
+});
+
+// Admin login routes (no admin middleware, as they are for unauthenticated users)
 Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminController::class, 'login']);
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('admin')->name('admin.dashboard');
 
 
