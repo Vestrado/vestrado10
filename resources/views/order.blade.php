@@ -14,13 +14,13 @@
                 @if (isset($orderItems[$order->id]))
                     <a href="order-{{ $order->id }}">
                     <img
-                        src="{{ asset('vestrado10/assets/images/' . ($orderItems[$order->id]->prod_img ?? 'default.png')) }}"
+                        src="{{ asset('vestrado10/public/products/' . ($orderItems[$order->id]->prod_img ?? 'default.png')) }}"
                         alt="{{ $orderItems[$order->id]->prod_name ?? 'Product Image' }}"
                         class="w-full md:w-56 h-auto rounded-lg" />
                         </a>
                 @else
                     <img
-                        src="{{ asset('assets/images/default.png') }}"
+                        src="{{ asset('public/products/default.png') }}"
                         alt="No Item"
                         class="w-full md:w-56 h-auto rounded-lg" />
                 @endif

@@ -4,7 +4,7 @@
         <div class="login-box">
           <div class="login-form">
             <a href="{{ route('login') }}" class="login-logo">
-              <img src="{{asset('/assets/images/logo.png')}}" alt="Admin Templates" style="width:100% !important;"/>
+              <img src="{{asset('/public/products/logo.png')}}" alt="Admin Templates" style="width:100% !important;"/>
             </a>
             <div class="login-welcome">
               Please login to your account.

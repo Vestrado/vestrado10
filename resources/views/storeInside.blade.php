@@ -5,18 +5,18 @@
 <main class=" grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="bg-white p-6 rounded-lg shadow">
         <img
-        src="assets/images/{{ $product->prod_img }}"
+        src="public/products/{{ $product->prod_img }}"
         alt="Hoodie"
         class="w-full h-50 object-cover rounded-md mb-4" />
         <div class="flex space-x-2">
             <img
-            src="assets/images/{{ $product->prod_img }}"
+            src="public/products/{{ $product->prod_img }}"
             class="w-20 h-20 rounded-md cursor-pointer" />
             <img
-            src="assets/images/{{ $product->prod_img }}"
+            src="public/products/{{ $product->prod_img }}"
             class="w-20 h-20 rounded-md cursor-pointer" />
             <img
-            src="assets/images/{{ $product->prod_img }}"
+            src="public/products/{{ $product->prod_img }}"
             class="w-20 h-20 rounded-md cursor-pointer" />
         </div>
     </div>
@@ -137,7 +137,7 @@
             @if(isset($islogin) && $islogin)
             <button id="getThisBtn"
             class="px-6 py-2 bg-black text-white rounded-md"
-            onclick="openModalWithSize('{{ $product->prod_name }}', '{{ $product->prod_id }}', '{{ $product->pts ?? 'N/A' }}', '{{ $product->lots ?? 'N/A' }}', '{{ $product->prod_img ?? 'assets/images/default.png' }}', '{{ $product->sku ?? 'N/A' }}')">
+            onclick="openModalWithSize('{{ $product->prod_name }}', '{{ $product->prod_id }}', '{{ $product->pts ?? 'N/A' }}', '{{ $product->lots ?? 'N/A' }}', '{{ $product->prod_img ?? 'public/products/default.png' }}', '{{ $product->sku ?? 'N/A' }}')">
             GET THIS
             </button>
             @endif
@@ -153,22 +153,22 @@
     <h3 class="text-lg font-bold mb-4">You May Also Like</h3>
     <div class="flex w-full gap-6">
         <div class="bg-gray-100 p-4 rounded-lg text-center">
-            <img src="assets/images/Thumb1_Camp57us.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+            <img src="public/products/Thumb1_Camp57us.png" class="w-full h-50 object-cover rounded-md mb-4"/>
             <h4 class="text-md font-semibold">Vestrado's Campus Tees</h4>
             <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg text-center">
-            <img src="assets/images/Thumb1_4645Campus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+            <img src="public/products/Thumb1_4645Campus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
             <h4 class="text-md font-semibold">Vestrado's Campus Cap</h4>
             <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg text-center">
-            <img src="assets/images/Thumb1_Cam4564pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+            <img src="public/products/Thumb1_Cam4564pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
             <h4 class="text-md font-semibold">Vestrado's Trading Plan</h4>
             <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg text-center">
-            <img src="assets/images/Thumb1_Cam465465pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
+            <img src="public/products/Thumb1_Cam465465pus.png" class="w-full h-50 object-cover rounded-md mb-4"/>
             <h4 class="text-md font-semibold">Vestrado's Trading Plan</h4>
             <p class="text-green-600 text-sm">50 LOTS / 370PTS</p>
         </div>

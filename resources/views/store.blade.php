@@ -41,7 +41,7 @@
             <div class="bg-white rounded-lg shadow p-4">
                 <a href="{{ route('product.detail', ['id' => $product->prod_id]) }}">
                     <img
-                        src="assets/images/{{ $product->prod_img ?? 'default.png' }}"
+                        src="public/products/{{ $product->prod_img ?? 'default.png' }}"
                         alt="{{ $product->prod_name ?? 'Product Image' }}"
                         class="w-full h-50 object-cover rounded-md mb-4" />
                     <h3 class="text-md font-semibold mb-1">

@@ -6,6 +6,8 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\storeController;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\orderController;
+use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +49,20 @@ Route::post('/chkprocess', [cartController::class, 'processCheckout'])->name('ch
 //order
 Route::get('/orderhistory', [orderController::class, 'index'])->name('order.history');
 Route::get('/order-{orderid}', [orderController::class, 'orderview'])->name('order.detail');
+
+//Admin
+// Route::prefix('admin')->middleware(['auth'])->group(function () {
+//     Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+//     Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
+//     // Add a dashboard route if needed
+//     Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
+// });
+Route::get('/products/create2', [AdminProductController::class, 'create'])->middleware('admin')->name('admin.products.create');
+Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
+Route::get('/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
+
+Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminController::class, 'login']);
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('admin')->name('admin.dashboard');
 
 

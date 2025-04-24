@@ -81,7 +81,7 @@
     {{-- <div class="w-full mx-auto mt-6 p-6 bg-white rounded-lg shadow-lg">
         <div class="flex items-center space-x-4">
             <img
-                src="assets/images/Thumb1_4645Campus.png"
+                src="public/products/Thumb1_4645Campus.png"
                 alt="Cypher Baseball Cap"
                 class="w-64 rounded-lg" />
             <div>
