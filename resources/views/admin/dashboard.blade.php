@@ -14,6 +14,8 @@
         </form>
         <br>
         <a href="{{ route('admin.products.create') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-red-600"> Create New Product </a>
+        <br></br>
+        <a href="{{ route('admin.products.listing') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-red-600"> Product Listing </a>
     </div>
 </body>
 </html>

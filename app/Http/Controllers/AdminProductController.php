@@ -64,4 +64,14 @@ class AdminProductController extends Controller
 
         return redirect()->route('admin.products.create')->with('success', 'Product added successfully!');
     }
+
+    public function listing()
+    {
+        $products = DB::connection('vestrado')->table('product')->get();
+
+        return view('admin.productlist', [
+            'products' => $products,
+        ]);
+
+    }
 }
