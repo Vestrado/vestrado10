@@ -73,6 +73,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
     Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
     Route::get('/products/list', [AdminProductController::class, 'listing'])->name('admin.products.listing');
+    Route::get('/products/edit-{prodid}', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+    Route::post('/productsupdate', [AdminProductController::class, 'produpdate'])->name('admin.products.update');
+    Route::post('/products/delete/{prodid}', [AdminProductController::class, 'delete'])->name('admin.products.delete');
 });
 
 // Admin login routes (no admin middleware, as they are for unauthenticated users)
