@@ -57,18 +57,14 @@
                         <td>{{ $item->total_lots }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
-                            <a href="{{ route('admin.products.edit', $item->id) }}" class="bg-blue-500 text-white px-2 py-1 rounded">Edit</a>
+                            <a href="{{ route('admin.products.edit', $item->id) }}" class="bg-blue-500 text-white px-2 py-1 rounded">View</a>
                             <!-- Delete form -->
-                            <form action="{{ route('admin.products.delete', ['prodid' => $item->id]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                            {{-- <form action="{{ route('admin.products.delete', ['prodid' => $item->id]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                 @csrf
                                 <input type="hidden" name="prodid" value="{{ $item->id }}">
                                 <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
-                            </form>
-                            {{-- <form action="{{ route('admin.products.listing', $item->prod_id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded" onclick="return confirm('Are you sure?')">Delete</button>
                             </form> --}}
+
 
                         </td>
                     </tr>
