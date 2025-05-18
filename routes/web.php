@@ -8,7 +8,7 @@ use App\Http\Controllers\cartController;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\AdminOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,6 +76,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/products/edit-{prodid}', [AdminProductController::class, 'edit'])->name('admin.products.edit');
     Route::post('/productsupdate', [AdminProductController::class, 'produpdate'])->name('admin.products.update');
     Route::post('/products/delete/{prodid}', [AdminProductController::class, 'delete'])->name('admin.products.delete');
+    Route::get('/adminorders/list', [AdminOrderController::class, 'listing'])->name('admin.orders.listing');
 });
 
 // Admin login routes (no admin middleware, as they are for unauthenticated users)
