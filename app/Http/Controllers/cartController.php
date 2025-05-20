@@ -341,7 +341,7 @@ class cartController extends Controller
             'total_pts' => $redemptionType === 'points' ? $totalPts : 0,
             'total_lots' => $redemptionType === 'lots' ? $totalLots : 0,
             'redemption_type' => $redemptionType,
-            'status' => 'completed',
+            'status' => 'Ordered',
             'created_at' => now(),
             'updated_at' => now(),
             'fullname' => $fullname,

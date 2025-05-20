@@ -57,7 +57,7 @@
                         <td>{{ $item->total_lots }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
-                            <a href="{{ route('admin.products.edit', $item->id) }}" class="bg-blue-500 text-white px-2 py-1 rounded">View</a>
+                            <a href="{{ route('admin.orders.view', $item->id) }}" class="bg-blue-500 text-white px-2 py-1 rounded">View</a>
                             <!-- Delete form -->
                             {{-- <form action="{{ route('admin.products.delete', ['prodid' => $item->id]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                 @csrf
