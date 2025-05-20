@@ -58,7 +58,7 @@
                     <td>: {{ $orders->phone }}</td>
                 </tr>
                 <tr>
-                    <td>Subtotal</td>
+                    <td>Total</td>
                     <td>: {{ $orders->total_lots }} PTS</td>
                     <td>Status</td>
                     <td><select name="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
@@ -97,6 +97,7 @@
                             <p class="text-sm text-gray-700">{{ $item->lots }}PTS</p>
                             <p class="text-sm text-gray-700">SIZE : {{ $item->size }}</p>
                             <p class="text-sm text-gray-700">QUANTITY : {{ $item->quantity }}</p>
+                            <p class="text-sm text-gray-700">SUB-TOTAL: {{ $item->lots * $item->quantity }} PTS</p>
                         </div>
                     </div>
                 </div>
