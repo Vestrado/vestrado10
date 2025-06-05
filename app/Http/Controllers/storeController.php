@@ -36,18 +36,29 @@ class storeController extends Controller
 
             // $totalVolume = collect($datatrade)->sum('volume');
             // $totalVolume = round(collect($datatrade)->sum('volume'), 2);
-            $totalVolume = collect($datatrade)->map(function ($item) {
-                if ($item['currency'] === 'USC') {
-                    return $item['volume'] / 1000;
-                }
-                return $item['volume'];
-            })->sum();
-            $totalVolume = round($totalVolume, 2);
+            // $totalVolume = collect($datatrade)->map(function ($item) {
+            //     if ($item['currency'] === 'USC') {
+            //         return $item['volume'] / 1000;
+            //     }
+            //     return $item['volume'];
+            // })->sum();
+            // $totalVolume = round($totalVolume, 2);
+
+
 
             $loginID = collect($datatrade)->pluck('login')->first();
 
             $databalance = $this->userService->fetchbalance(session('loadid'),$loginID);
             $balance = collect($databalance)->pluck('tradeBalance')->first();
+
+            $userId=session('loadid');
+            $totalVolume2 = DB::connection('vestrado')->table('users_info')
+            ->where('user_id', $userId)
+            ->select('total_lots')
+            ->first();
+
+            // Extract total_lots or default to 0 if no record is found
+            $totalVolume= $totalVolume2 ? $totalVolume2->total_lots : 0;
 
             if ($data) {
                 return view('storeInside', [

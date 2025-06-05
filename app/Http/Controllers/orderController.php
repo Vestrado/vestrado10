@@ -20,23 +20,31 @@ class orderController extends Controller
         if (session('loadid')) {
             $data = $this->userService->fetchUserDetails(session('loadid'));
             $datatrade = $this->userService->fetchtrade(session('loadid'));
+            $id = session('loadid');
 
             // $totalVolume = collect($datatrade)->sum('volume');
             // $totalVolume = round(collect($datatrade)->sum('volume'), 2);
-            $totalVolume = collect($datatrade)->map(function ($item) {
-                if ($item['currency'] === 'USC') {
-                    return $item['volume'] / 1000;
-                }
-                return $item['volume'];
-            })->sum();
-            $totalVolume = round($totalVolume, 2);
+            // $totalVolume = collect($datatrade)->map(function ($item) {
+            //     if ($item['currency'] === 'USC') {
+            //         return $item['volume'] / 1000;
+            //     }
+            //     return $item['volume'];
+            // })->sum();
+            // $totalVolume = round($totalVolume, 2);
+            $totalVolume2 = DB::connection('vestrado')->table('users_info')
+            ->where('user_id', $id)
+            ->select('total_lots')
+            ->first();
+
+            // Extract total_lots or default to 0 if no record is found
+            $totalVolume= $totalVolume2 ? $totalVolume2->total_lots : 0;
 
             $loginID = collect($datatrade)->pluck('login')->first();
 
             $databalance = $this->userService->fetchbalance(session('loadid'),$loginID);
             $balance = collect($databalance)->pluck('tradeBalance')->first();
 
-            $id = session('loadid');
+
             // Fetch products
             $products = DB::connection('vestrado')->table('product')->get();
 
@@ -96,13 +104,21 @@ class orderController extends Controller
 
             // $totalVolume = collect($datatrade)->sum('volume');
             // $totalVolume = round(collect($datatrade)->sum('volume'), 2);
-            $totalVolume = collect($datatrade)->map(function ($item) {
-                if ($item['currency'] === 'USC') {
-                    return $item['volume'] / 1000;
-                }
-                return $item['volume'];
-            })->sum();
-            $totalVolume = round($totalVolume, 2);
+            // $totalVolume = collect($datatrade)->map(function ($item) {
+            //     if ($item['currency'] === 'USC') {
+            //         return $item['volume'] / 1000;
+            //     }
+            //     return $item['volume'];
+            // })->sum();
+            // $totalVolume = round($totalVolume, 2);
+            $userId=session('loadid');
+            $totalVolume2 = DB::connection('vestrado')->table('users_info')
+            ->where('user_id', $userId)
+            ->select('total_lots')
+            ->first();
+
+            // Extract total_lots or default to 0 if no record is found
+            $totalVolume= $totalVolume2 ? $totalVolume2->total_lots : 0;
 
             $loginID = collect($datatrade)->pluck('login')->first();
 

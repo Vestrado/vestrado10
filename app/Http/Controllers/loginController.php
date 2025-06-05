@@ -92,6 +92,13 @@ class loginController extends Controller
             //         'last_trans' => $lastCloseDate,
             //     ]);
             // }
+            $totalVolume2 = DB::connection('vestrado')->table('users_info')
+            ->where('user_id', $userID)
+            ->select('total_lots')
+            ->first();
+
+            // Extract total_lots or default to 0 if no record is found
+            $totalVolume= $totalVolume2 ? $totalVolume2->total_lots : 0;
 
             $databalance = $this->userService->fetchbalance(session('loadid'),$loginID);
             $balance = collect($databalance)->pluck('tradeBalance')->first();
