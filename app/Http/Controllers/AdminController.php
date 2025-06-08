@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -33,6 +34,19 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard2');
+        $pendingorder = DB::connection('vestrado')->table('orders')
+        ->whereIn('status', ['Pending', 'Ordered', 'Processing', 'Shipping'])
+        ->count();
+
+        $ttl_order = DB::connection('vestrado')->table('orders')->count();
+
+        $allproducts = DB::connection('vestrado')->table('product')->count();
+
+        return view('admin.dashboard2', [
+            'pendingorder' => $pendingorder,
+            'ttl_order' => $ttl_order,
+            'allproducts' => $allproducts,
+        ]);
+        //return view('admin.dashboard2');
     }
 }
